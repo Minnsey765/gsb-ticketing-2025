@@ -3,7 +3,7 @@
     "model": "ticketing.Setting",
     "pk": 1,
     "fields": {
-      "current_wave": ["INTERNAL"]
+      "current_wave": ["GIRTON_ONLY"]
     }
   }
 ]

@@ -266,6 +266,7 @@ class Ticket(models.Model):
 
     is_veg = models.BooleanField(default=False)
     is_alc = models.BooleanField(default=False)
+    is_ubus = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'tickets'

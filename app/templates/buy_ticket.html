@@ -29,7 +29,7 @@
                 {% include "partials/ticketkind_list.html" with qs=valid_ticketkinds only %}
             {% endif %}
             {% if user.kind.enum == "GIRTON_ALUM" %}
-                An optional contribution of £15 to the Ball is kindly requested of alumni. This contribution will be used  to partially finance/subsidise the tickets of current Girton students who are in receipt of a College Bursary.
+                An optional contribution of £15 to the Ball is kindly requested of alumni. This contribution will be used to partially finance/subsidise the tickets of current Girton students who are in receipt of a College Bursary.
             {% endif %}
         </div>
     </div>
@@ -102,8 +102,17 @@
                     <label class="form-check-label">
                         I generally do not drink alcohol
                     </label>
+                </div> 
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="true" name="{{form.is_ubus.html_name}}">
+                    <label class="form-check-label">
+                        I would be interested in using a early-morning / late-night UBus service 
+                    </label>
                 </div>
             </div>
+        </div>
             <div class="form-text">
                 Any accesibility requirements should be made known at the earliest instance to the <a href="mailto:gsb23accessibility@gmail.com">Sustainability and Accessibility Officer</a>.
             </div>

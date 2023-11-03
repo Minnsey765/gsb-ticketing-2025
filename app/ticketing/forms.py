@@ -36,6 +36,7 @@ class BuyTicketForm(forms.Form):
     kind = forms.ModelChoiceField(queryset=None, initial=1)
     is_alc = forms.BooleanField(required=False)
     is_veg = forms.BooleanField(required=False)
+    is_ubus = forms.BooleanField(required=False)
 
 
 class GuestLoginForm(forms.Form):

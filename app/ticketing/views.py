@@ -312,6 +312,7 @@ def buy_ticket(request):
                 kind=form.cleaned_data['kind'],
                 is_veg=form.cleaned_data['is_veg'],
                 is_alc=form.cleaned_data['is_alc'],
+                is_ubus=form.cleaned_data['is_ubus'],
                 payment_method=user.kind.payment_method,
             )
             allocation = ticket.kind.allocation

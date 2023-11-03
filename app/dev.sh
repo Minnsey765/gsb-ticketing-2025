@@ -14,4 +14,3 @@ for verb in "$@"; do
   esac
 done
 
-export `heroku config -a gsb-ticketing -s | grep GOOGLE`
