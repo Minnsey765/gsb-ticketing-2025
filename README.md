@@ -28,6 +28,9 @@ Django-powered web application for the 2023 Girton Spring Ball Ticketing platfor
 
 Lookup requests are forwarded from a simple CGI script hosted inside the University.
 
+We want to change this to something better - ideally carrying out the lookup request a proper API call with the appropriate credentials. Need to talk to university to see if these credentials can be issued for the spring ball platform. 
+
+
 - Move to `public_html`
 - Set appropriate permissions
 
@@ -42,6 +45,11 @@ Changes to make:
 3. Set yourself as superuser and staff via psql
 4. Clean up any migrations, shortcuts: `heroku run bash` or `heroku psql`
 5. Set the right promocode, change the wave, etc
+6. Push instance to AWS Lambda and migrate PostGRESQL. Verify function
+7. Liase and obtain any other fields that need to be added to the purchase form
+8. Meet with Kim Pearson and Vicky about alumni tickets 
+9. Ask Krish how alumni tickets were done and start actioning
+10.  
 
 ## Ticket scanning
 
@@ -74,4 +82,4 @@ MIT
 
 ## Credits
 
-Matias Silva 2022
+Matias Silva 2022   
