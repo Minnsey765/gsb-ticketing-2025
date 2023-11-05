@@ -344,7 +344,7 @@ def buy_ticket(request):
                 send_mail(
                     'GSB23 Ticketing: Ticket Confirmation',
                     msg,
-                    'it@girtonball.com',
+                    'it@girtonspringball.com',
                     recipients,
                 )
             else:
@@ -461,7 +461,7 @@ def buy_change(request, ref=None):
             send_mail(
                 'GSB23 Ticketing: Name Change Request',
                 msg,
-                'it@girtonball.com',
+                'it@girtonspringball.com',
                 recipients,
             )
             messages.add_message(

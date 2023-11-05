@@ -1,6 +1,6 @@
 Hi {{ticket.name}},
 
-You've bought a {{ticket.kind.name}}{%if not ticket.is_own %} (Guest){% endif %} ticket to the 2023 Girton Spring Ball at the cost of £{{ticket.price}}. This is a confirmation email.
+You've bought a {{ticket.kind.name}}{%if not ticket.is_own %} (Guest){% endif %} ticket to the 2024 Girton Spring Ball at the cost of £{{ticket.price}}. This is a confirmation email.
 {% if ticket.payment_method.enum == 'COLLEGE_BILL' %}
 The amount due will be debited from your Lent Term College Bill. Once confirmation of this has been received from the Bursary Clerk, your ticket purchase will be marked as 'completed'. Until then, it will show up as 'pending'. Rest assured, your ticket has been secured.
 {% elif ticket.payment_method.enum == 'BANK_TRANSFER' %}
@@ -22,9 +22,9 @@ No payment is necessary!
 {% endif %}
 Your ticket number is {{ticket.uuid}}. Please quote this in all future correspondence with us.
 
-For any queries about your ticket, please email it@girtonball.com or reply to this email.
+For any queries about your ticket, please email it@girtonspringball.com or reply to this email.
 
 With warm wishes,
 
-Matias & Krish
-GSB23 IT & Ticketing
+Yuvraj & Peter
+GSB24 IT & Ticketing

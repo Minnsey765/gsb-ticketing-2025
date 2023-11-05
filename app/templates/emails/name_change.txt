@@ -1,6 +1,6 @@
 Hi {{ticket.purchaser.get_full_name}},
 
-You've requested a name change for your {{ticket.kind.name}} (Guest) ticket to the 2023 Girton Spring Ball. This is a request for payment.
+You've requested a name change for your {{ticket.kind.name}} (Guest) ticket to the 2024 Girton Spring Ball. This is a request for payment.
 
 ## Previous attendee information ##
 
@@ -27,14 +27,14 @@ Amount : £15
 
 For payments from Overseas:
 IBAN Number : GB48BARC20176850402508
-SwiftBic Code : BARCGB22
+SwiftBic Code : BARCGcdB22
 
 The ticket reference is {{ticket.uuid}}.
 The name change reference is {{nc.payment_ref}}.
 
-Please quote both in all future correspondence with us regarding this matter. For any queries about your name change request, please email it@girtonball.com or reply to this email.
+Please quote both in all future correspondence with us regarding this matter. For any queries about your name change request, please email it@girtonspringball.com or reply to this email.
 
 With warm wishes,
 
-Matias & Krish
+Yuvraj & Peter
 GSB23 IT & Ticketing

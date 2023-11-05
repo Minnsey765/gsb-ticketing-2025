@@ -114,7 +114,7 @@ hAM+a6/30F5fdkWpE1smPyrfASyXRfWE4Ccn1RVgYX9u
 # UCAMWEBAUTH_TIMEOUT:
 UCAMWEBAUTH_REDIRECT_AFTER_LOGIN = "/manage"
 # UCAMWEBAUTH_CREATE_USER:
-UCAMWEBAUTH_DESC = "Girton Spring Ball 2023 Ticketing"
+UCAMWEBAUTH_DESC = "Girton Spring Ball 2024 Ticketing"
 # UCAMWEBAUTH_IACT:
 UCAMWEBAUTH_MSG = "Authentication required to purchase/manage tickets"
 # UCAMWEBAUTH_PARAMS:

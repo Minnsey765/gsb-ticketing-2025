@@ -2,9 +2,9 @@ Hi {{ticket.name}},
 
 You've requested access to your ticket recently and/or are unable to log in to your account. Please find your ticket {% autoescape off %} <a href="{{url}}">here</a>. {% endautoescape %}
 
-For any queries, please email it@girtonball.com or reply to this email.
+For any queries, please email it@girtonspringball.com or reply to this email.
 
 Warm wishes,
 
-Matias & Krish
+Yuvraj & Peter
 GSB23 IT & Ticketing

@@ -158,9 +158,9 @@ class TicketAdmin(admin.ModelAdmin):
             if not ticket.is_own:
                 recipients.append(ticket.purchaser.email)
             send_mail(
-                'GSB23 Ticketing: Ticket Confirmation',
+                'GSB24 Ticketing: Ticket Confirmation',
                 msg,
-                'it@girtonball.com',
+                'it@girtonspringball.com',
                 recipients,
             )
         self.message_user(
@@ -180,7 +180,7 @@ class TicketAdmin(admin.ModelAdmin):
             send_mail(
                 'GSB23 Ticketing: Payment Cleared',
                 msg,
-                'it@girtonball.com',
+                'it@girtonspringball.com',
                 recipients,
             )
         self.message_user(
@@ -200,7 +200,7 @@ class TicketAdmin(admin.ModelAdmin):
             send_mail(
                 'GSB23 Ticketing: Payment reminder',
                 msg,
-                'it@girtonball.com',
+                'it@girtonspringball.com',
                 recipients,
             )
         self.message_user(
@@ -248,7 +248,7 @@ class TicketAdmin(admin.ModelAdmin):
             send_mail(
                 'GSB23 Ticketing: Download your ticket',
                 strip_tags(msg),
-                'it@girtonball.com',
+                'it@girtonspringball.com',
                 recipients,
                 html_message=msg,
             )
@@ -257,7 +257,6 @@ class TicketAdmin(admin.ModelAdmin):
             f'{queryset.count()} emails were successfully sent.',
             messages.SUCCESS,
         )
-
 
     @admin.action(description='Mark Ticket As Paid')
     def mark_paid(self, request, queryset):
@@ -329,7 +328,7 @@ class NameChangeAdmin(admin.ModelAdmin):
             send_mail(
                 'GSB23 Ticketing: Name Change Request',
                 msg,
-                'it@girtonball.com',
+                'it@girtonspringball.com',
                 recipients,
             )
         self.message_user(

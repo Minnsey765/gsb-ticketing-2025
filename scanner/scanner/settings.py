@@ -90,7 +90,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EMAIL_HOST = 'smtp.zeptomail.eu'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-SERVER_EMAIL = f'it@girtonball.com'
+SERVER_EMAIL = f'it@girtonspringball.com'
 
 if 'EMAIL_HOST_USER' in os.environ:
     EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
