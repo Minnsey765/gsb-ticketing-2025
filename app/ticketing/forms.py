@@ -1,7 +1,7 @@
+from django.contrib.auth.password_validation import validate_password
 from datetime import date
 
 from django import forms
-from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 
 from .models import PromoCode, TicketKind, User
@@ -39,6 +39,13 @@ class BuyTicketForm(forms.Form):
     is_ubus = forms.BooleanField(required=False)
 
 
+class WorkerApplicationForm(forms.Form):
+    name = forms.CharField(max_length=100, initial="")
+    surname = forms.CharField(max_length=100, initial="")
+
+
+
+
 class GuestLoginForm(forms.Form):
     email = forms.EmailField()
     passphrase = forms.CharField(max_length=30)
@@ -48,7 +55,7 @@ class GuestSignupForm(forms.Form):
     name = forms.CharField(max_length=100, initial="")
     surname = forms.CharField(max_length=100, initial="")
     email = forms.EmailField(initial="")
-    passphrase = forms.CharField()
+    passphrase = forms.CharField(min_length=14)
     matric_date = forms.DateField()
     pname = forms.CharField(max_length=100, required=False, initial="")
     psurname = forms.CharField(max_length=100, required=False, initial="")
@@ -66,6 +73,7 @@ class GuestSignupForm(forms.Form):
     def clean_password(self):
         data = self.cleaned_data['passphrase']
         validate_password(data)
+        return data
 
     def clean_email(self):
         data = self.cleaned_data['email']
