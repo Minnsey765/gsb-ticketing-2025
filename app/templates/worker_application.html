@@ -25,15 +25,9 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="{{worker_form.name.id_for_label}}" class="col-lg-4 col-form-label">First name</label>
+                    <label for="{{worker_form.name.id_for_label}}" class="col-lg-4 col-form-label">Name</label>
                     <div class="col-lg-8">
                         <input name="{{ worker_form.name.html_name }}" type="input" class="form-control " id="{{worker_form.name.id_for_label}}" value="{{worker_form.name.value}}">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="{{worker_form.surname.id_for_label}}" class="col-lg-4 col-form-label">Surname</label>
-                    <div class="col-lg-8">
-                        <input name="{{ worker_form.surname.html_name }}" type="input" class="form-control " id="{{worker_form.surname.id_for_label}}" value="{{worker_form.surname.value}}">
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -45,7 +39,13 @@
                 <div class="mb-3 row">
                     <label for="{{worker_form.cover_letter.id_for_label}}" class="col-lg-4 col-form-label">Upload cover letter</label>
                     <div class="col-lg-8">
-                        <input name="{{ worker_form.cv.html_name }}" type="file" class="form-control-file" id="{{worker_form.cover_letter.id_for_label}}" value="{{worker_form.cv.value}}">
+                        <input name="{{ worker_form.cover_letter.html_name }}" type="file" class="form-control-file" id="{{worker_form.cover_letter.id_for_label}}" value="{{worker_form.cover_letter.value}}">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="{{worker_form.role.id_for_label}}" class="col-lg-4 col-form-label">Role</label>
+                    <div class="col-lg-8">
+                        <input readonly name="{{ worker_form.role.html_name }}" type="input" class="form-control-plaintext " id="{{worker_form.role.id_for_label}}" value="{{worker_form.role.value}}">
                     </div>
                 </div>
                 <button class="w-100 btn btn-lg btn-primary btn-gsb-alum" type="submit">Submit Application</button>
