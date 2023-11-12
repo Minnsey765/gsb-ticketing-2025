@@ -283,7 +283,7 @@ def worker_application(request):
     if request.method == 'GET':
         role = request.GET.get('selected_role')
         form = WorkerApplicationForm(initial={'role': selected_role})
-        return render(request, 'worker_application.html', {'form': form})
+        return render(request, 'worker_application.html', {'worker_form': form})
 
     elif request.method == 'POST':
         req_post = request.POST.copy()
@@ -310,7 +310,11 @@ def worker_application(request):
                 messages.SUCCESS,
                 'Application Submitted!',
             )
-            return render(request, "worker_application.html")
+            return render(request,  "worker_application.html",
+                {
+                    "title": "Worker Application Form",
+                    "worker_form": form,
+                },)
         else:
             messages.add_message(
                 request,
@@ -319,7 +323,11 @@ def worker_application(request):
             )
             return render(
                 request,
-                "worker_application.html"
+                "worker_application.html",
+                {
+                    "title": "Worker Application Form",
+                    "worker_form": form,
+                },
             )
     else:
         return HttpResponse(status=405)
