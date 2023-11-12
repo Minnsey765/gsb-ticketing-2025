@@ -12,6 +12,7 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from google.cloud import storage
 from google.oauth2.service_account import Credentials
+from django.http import FileResponse
 
 from .forms import (
     BuyTicketForm,
@@ -19,6 +20,7 @@ from .forms import (
     GuestSignupForm,
     NameChangeForm,
     SignupForm,
+    WorkerApplicationForm,
 )
 from .models import (
     AllowedUser,
@@ -28,6 +30,7 @@ from .models import (
     TicketExtra,
     User,
     UserKind,
+    WorkerApplication,
 )
 from .utils import login_required, match_identity, validate_ticket_ref
 
@@ -252,6 +255,75 @@ def manage(request):
             "wave": wave,
         },
     )
+
+
+def worker_docs(request, application, document):
+    
+    if not request.user.is_staff:
+        raise PermissionError("Forbidden!")
+
+    # Check if application or document is None
+    if application is None or document is None:
+        # Handle the error or return an appropriate response
+        return HttpResponse("Invalid file path", status=400)
+
+    # Construct the full file path using os.path.join
+    full_file_path = os.path.join('workerdocs', application, document)
+
+    # Check if the file exists
+    if not os.path.isfile(full_file_path):
+        return HttpResponse("File not found", status=404)
+
+    # Use FileResponse to serve the file
+    return FileResponse(open(full_file_path, 'rb'))
+
+
+def worker_application(request):
+
+    if request.method == 'GET':
+        role = request.GET.get('selected_role')
+        form = WorkerApplicationForm(initial={'role': selected_role})
+        return render(request, 'worker_application.html', {'form': form})
+
+    elif request.method == 'POST':
+        req_post = request.POST.copy()
+        form = WorkerApplicationForm()
+        if form.is_valid():
+            application = WorkerApplication(
+                name=form.cleaned_data['name'],
+                email=form.cleaned_data['email'],
+                cv=form.cleaned_data['cv'],
+                cover_letter=form.cleaned_data['cover_letter'],
+            )
+            # send confirmation email
+            msg = render_to_string("emails/buy.txt", {"ticket": ticket})
+            recipients = [ticket.email]
+            # both purchaser and attendee should receive email
+            send_mail(
+                'GSB24 Worker Applications: Application Received',
+                msg,
+                'it@girtonspringball.com',
+                recipients,
+            )
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Application Submitted!',
+            )
+            return render(request, "worker_application.html")
+        else:
+            messages.add_message(
+                request,
+                messages.WARNING,
+                'Invalid Data!',
+            )
+            return render(
+                request,
+                "worker_application.html"
+            )
+    else:
+        return HttpResponse(status=405)
+
 
 
 @login_required

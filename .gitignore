@@ -5,7 +5,7 @@ __pycache__
 db.sqlite3
 source.db
 #django-ucamwebauth/
-
+workerdocs/
 
 # Avoid comitting user info
 scripts/plan_b/pdfs/

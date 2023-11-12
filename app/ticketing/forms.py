@@ -55,17 +55,12 @@ class BuyTicketForm(forms.Form):
 
 
 
-
-        
-
-
 class WorkerApplicationForm(forms.Form):
     name = forms.CharField(max_length=100, initial="")
     surname = forms.CharField(max_length=100, initial="")
     email = forms.EmailField(initial="")
     cv = forms.FileField(allow_empty_file=False)
     cover_letter = forms.FileField(allow_empty_file=False)
-    role = forms.CharField(max_length=200, initial="")
 
 
 class GuestLoginForm(forms.Form):

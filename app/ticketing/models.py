@@ -15,10 +15,15 @@ def gen_random_id(prefix):
 def gen_ticket_id():
     return gen_random_id('GSB')
 
+def gen_workerapp_id():
+    return gen_random_id('GSBWA')
+
 
 def gen_namechange_id():
     return gen_random_id('GSBNC')
 
+def gen_workerapp_path(instance, filename):
+        return "workerdocs/application_{0}/{1}".format(instance.name.strip().replace(" ", "_"), filename)
 
 class AllowedUserManager(models.Manager):
     def get_by_natural_key(self, username):
@@ -34,6 +39,9 @@ class TicketKindManager(models.Manager):
     def get_by_natural_key(self, enum):
         return self.get(enum=enum)
 
+class WorkerApplicationRoleManager(models.Manager):
+    def get_by_natural_key(self, enum):
+        return self.get(enum=enum)
 
 class UserKindManager(models.Manager):
     def get_by_natural_key(self, enum):
@@ -303,6 +311,40 @@ class Ticket(models.Model):
             sum_extras = extra.price
         return sum_extras + self.kind.price
 
+
+
+class WorkerApplicationRole(models.Model):
+
+    enum = models.CharField(max_length=20, unique=True)
+    title = models.CharField(max_length=100)
+    pay = models.DecimalField(default=12.90, max_digits=4, decimal_places=2)
+    description = models.TextField(max_length=600)
+
+    objects = WorkerApplicationRoleManager()
+
+    class Meta:
+        db_table = 'workerapproles'
+
+    def __str__(self):
+        return f"{self.enum}"
+
+    def is_available(self):
+        return self.allocation.is_available()
+
+
+class WorkerApplication(models.Model):
+    name = models.CharField(max_length = 100)
+    email = models.EmailField()
+    cv = models.FileField(upload_to=gen_workerapp_path)
+    uuid = models.CharField(max_length=13, default=gen_workerapp_id)
+    cover_letter = models.FileField(upload_to=gen_workerapp_path)
+    
+    # application role
+    role = models.ForeignKey(WorkerApplicationRole, on_delete=models.CASCADE, related_name='worker_applications', default=1)
+
+    class Meta:
+        db_table = 'worker_applications'
+    
 
 class NameChange(models.Model):
     new_name = models.CharField(max_length=100)

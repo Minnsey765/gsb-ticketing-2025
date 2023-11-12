@@ -1,0 +1,32 @@
+[
+    {
+        "model": "ticketing.WorkerApplicationRole",
+        "pk": 1,
+        "fields": {
+            "enum": "TEMP1",
+            "title": "Temporary Role 1",
+            "pay": 14.90,
+            "description": "lorem ipsum dolor"
+        }
+    },
+    {
+        "model": "ticketing.WorkerApplicationRole",
+        "pk": 2,
+        "fields": {
+            "enum": "TEMP2",
+            "title": "Temporary Role 2",
+            "pay": 12.90,
+            "description": "lorem ipsum dolor"
+        }
+    },
+    {
+        "model": "ticketing.WorkerApplicationRole",
+        "pk": 3,
+        "fields": {
+            "enum": "TEMP3",
+            "title": "Temporary Role 3",
+            "pay": 13.90,
+            "description": "lorem ipsum dolor"
+        }
+    }
+]

@@ -17,6 +17,8 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from google.cloud import storage
 from google.oauth2.service_account import Credentials
+from django.utils.html import format_html
+
 
 from .models import (
     AllowedUser,
@@ -30,6 +32,8 @@ from .models import (
     User,
     UserKind,
     Wave,
+    WorkerApplication,
+    WorkerApplicationRole,
 )
 
 
@@ -63,6 +67,21 @@ class UserAdmin(UserAdminOriginal):
     @admin.display(description='Tickets bought')
     def tickets_bought(self, obj):
         return obj.tickets.count()
+
+
+class WorkerApplicationAdmin(admin.ModelAdmin):
+
+    list_display = ("name", "email", "cv", "cover_letter", "role")
+    
+    @admin.display(description='Application count')
+    def worker_applications_submitted(self, obj):
+        return WorkerApplication.objects.filter(kind=obj).count()
+    
+    def cover_letter(self, obj):
+        url = obj.pdf_file.url
+        html = '<embed src="{url}" type="application/pdf">'
+        formatted_html = format_html(html.format(url=obj.cover.url))
+        return formatted_html
 
 
 class UserKindAdmin(admin.ModelAdmin):
@@ -178,7 +197,7 @@ class TicketAdmin(admin.ModelAdmin):
             if not ticket.is_own:
                 recipients.append(ticket.purchaser.email)
             send_mail(
-                'GSB23 Ticketing: Payment Cleared',
+                'GSB24 Ticketing: Payment Cleared',
                 msg,
                 'it@girtonspringball.com',
                 recipients,
@@ -198,7 +217,7 @@ class TicketAdmin(admin.ModelAdmin):
             if not ticket.is_own:
                 recipients.append(ticket.purchaser.email)
             send_mail(
-                'GSB23 Ticketing: Payment reminder',
+                'GSB24 Ticketing: Payment reminder',
                 msg,
                 'it@girtonspringball.com',
                 recipients,
@@ -246,7 +265,7 @@ class TicketAdmin(admin.ModelAdmin):
             )
             recipients = [ticket.email]
             send_mail(
-                'GSB23 Ticketing: Download your ticket',
+                'GSB24 Ticketing: Download your ticket',
                 strip_tags(msg),
                 'it@girtonspringball.com',
                 recipients,
@@ -326,7 +345,7 @@ class NameChangeAdmin(admin.ModelAdmin):
             )
             recipients = [nc.new_email, nc.ticket.purchaser.email, nc.ticket.email]
             send_mail(
-                'GSB23 Ticketing: Name Change Request',
+                'GSB24 Ticketing: Name Change Request',
                 msg,
                 'it@girtonspringball.com',
                 recipients,
@@ -339,6 +358,8 @@ class NameChangeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(User, UserAdmin)
+admin.site.register(WorkerApplication, WorkerApplicationAdmin)
+admin.site.register(WorkerApplicationRole)
 admin.site.register(Ticket, TicketAdmin)
 admin.site.register(TicketKind, TicketKindAdmin)
 admin.site.register(Setting)
