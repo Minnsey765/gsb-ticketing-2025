@@ -7,12 +7,11 @@ import requests
 from django.contrib import messages
 from django.contrib.auth import BACKEND_SESSION_KEY, authenticate, login, logout
 from django.core.mail import mail_admins, send_mail
-from django.http import Http404
+from django.http import FileResponse, Http404, HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from google.cloud import storage
 from google.oauth2.service_account import Credentials
-from django.http import FileResponse
 
 from .forms import (
     BuyTicketForm,
@@ -164,7 +163,6 @@ def signup_guest(request):
 
 
 def guest_portal(request):
-
     return render(
         request,
         "login_manual.html",
@@ -258,7 +256,7 @@ def manage(request):
 
 
 def worker_docs(request, application, document):
-    
+
     if not request.user.is_staff:
         raise PermissionError("Forbidden!")
 
@@ -282,11 +280,10 @@ def worker_application(request):
 
     if request.method == 'GET':
         role = request.GET.get('selected_role')
-        form = WorkerApplicationForm(initial={'role': selected_role})
+        form = WorkerApplicationForm(initial={'role': role})
         return render(request, 'worker_application.html', {'form': form})
 
     elif request.method == 'POST':
-        req_post = request.POST.copy()
         form = WorkerApplicationForm()
         if form.is_valid():
             application = WorkerApplication(
@@ -296,8 +293,10 @@ def worker_application(request):
                 cover_letter=form.cleaned_data['cover_letter'],
             )
             # send confirmation email
-            msg = render_to_string("emails/buy.txt", {"ticket": ticket})
-            recipients = [ticket.email]
+            msg = render_to_string(
+                "emails/worker_application.txt", {"name": application.name}
+            )
+            recipients = [application.email]
             # both purchaser and attendee should receive email
             send_mail(
                 'GSB24 Worker Applications: Application Received',
@@ -317,13 +316,9 @@ def worker_application(request):
                 messages.WARNING,
                 'Invalid Data!',
             )
-            return render(
-                request,
-                "worker_application.html"
-            )
+            return render(request, "worker_application.html")
     else:
         return HttpResponse(status=405)
-
 
 
 @login_required

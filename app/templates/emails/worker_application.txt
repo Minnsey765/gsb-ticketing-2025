@@ -1,0 +1,8 @@
+Hi {{worker.name}},
+
+You have successfully applied to work at Girton Spring Ball 2024. We'll contact you with more details soon.
+
+Warm wishes,
+
+Yuvraj & Peter
+GSB24 IT & Ticketing

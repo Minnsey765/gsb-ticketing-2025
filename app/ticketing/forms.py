@@ -1,7 +1,7 @@
-from django.contrib.auth.password_validation import validate_password
 from datetime import date
 
 from django import forms
+from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 
 from .models import PromoCode, TicketKind, User
@@ -38,7 +38,7 @@ class BuyTicketForm(forms.Form):
     is_veg = forms.BooleanField(required=False)
     is_ubus = forms.BooleanField(required=False)
     verif = forms.CharField(max_length=100, initial="")
-    
+
     def clean_verif(self):
         data = self.cleaned_data['verif']
         alum_code = PromoCode.objects.get(enum='ALUM_SIGNUP')
@@ -46,13 +46,18 @@ class BuyTicketForm(forms.Form):
         kind = self.cleaned_data.get('kind')
         print(kind)
         if data == alum_code.value:
-            raise ValidationError("You are logged in with a Raven account! Please logout and use the Alumni sign in option.")
-        elif kind and data != bursary_code.value and (kind.enum == "S_BURSARY" or kind.enum == "QJ_BURSARY") :
+            raise ValidationError(
+                "You are logged in with a Raven account! Please logout and use the Alumni sign in option."
+            )
+        elif (
+            kind
+            and data != bursary_code.value
+            and (kind.enum == "S_BURSARY" or kind.enum == "QJ_BURSARY")
+        ):
             print(self.cleaned_data['kind'])
             raise ValidationError("Invalid code for Bursary ticket!")
-        
-        return data
 
+        return data
 
 
 class WorkerApplicationForm(forms.Form):
