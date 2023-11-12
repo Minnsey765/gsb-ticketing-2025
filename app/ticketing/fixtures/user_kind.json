@@ -7,7 +7,7 @@
       "enum": "GIRTON_UGRAD",
       "allowance": 3,
       "payment_method": ["COLLEGE_BILL"],
-      "ticket_kinds": [["S"], ["QJ"], ["S_EXT"], ["QJ_EXT"], ["BURSARY"]]
+      "ticket_kinds": [["S"], ["QJ"], ["S_EXT"], ["QJ_EXT"], ["S_BURSARY"],["QJ_BURSARY"]]
     }
   },
   {
@@ -18,7 +18,7 @@
       "enum": "GIRTON_PGRAD",
       "allowance": 3,
       "payment_method": ["COLLEGE_BILL"],
-      "ticket_kinds": [["S"], ["QJ"], ["S_EXT"], ["QJ_EXT"], ["BURSARY"]]
+      "ticket_kinds": [["S"], ["QJ"], ["S_EXT"], ["QJ_EXT"], ["S_BURSARY"],["QJ_BURSARY"]]
     }
   },
   {
@@ -69,7 +69,7 @@
     "model": "ticketing.UserKind",
     "pk": 7,
     "fields": {
-      "name": "GSB22 committee (graduated)",
+      "name": "GSB24 committee (graduated)",
       "enum": "OLD_COMM_GRADUATES",
       "allowance": 2,
       "payment_method": ["COLLEGE_BILL"],
@@ -85,7 +85,7 @@
     "model": "ticketing.UserKind",
     "pk": 8,
     "fields": {
-      "name": "GSB22 committee (student)",
+      "name": "GSB24 committee (student)",
       "enum": "OLD_COMM_STUDENT",
       "allowance": 3,
       "payment_method": ["COLLEGE_BILL"],

@@ -37,13 +37,35 @@ class BuyTicketForm(forms.Form):
     is_alc = forms.BooleanField(required=False)
     is_veg = forms.BooleanField(required=False)
     is_ubus = forms.BooleanField(required=False)
+    verif = forms.CharField(max_length=100, initial="")
+    
+    def clean_verif(self):
+        data = self.cleaned_data['verif']
+        alum_code = PromoCode.objects.get(enum='ALUM_SIGNUP')
+        bursary_code = PromoCode.objects.get(enum='BURSARY_ENABLE')
+        kind = self.cleaned_data.get('kind')
+        print(kind)
+        if data == alum_code.value:
+            raise ValidationError("You are logged in with a Raven account! Please logout and use the Alumni sign in option.")
+        elif kind and data != bursary_code.value and (kind.enum == "S_BURSARY" or kind.enum == "QJ_BURSARY") :
+            print(self.cleaned_data['kind'])
+            raise ValidationError("Invalid code for Bursary ticket!")
+        
+        return data
+
+
+
+
+        
 
 
 class WorkerApplicationForm(forms.Form):
     name = forms.CharField(max_length=100, initial="")
     surname = forms.CharField(max_length=100, initial="")
-
-
+    email = forms.EmailField(initial="")
+    cv = forms.FileField(allow_empty_file=False)
+    cover_letter = forms.FileField(allow_empty_file=False)
+    role = forms.CharField(max_length=200, initial="")
 
 
 class GuestLoginForm(forms.Form):

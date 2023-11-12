@@ -347,6 +347,7 @@ def buy_ticket(request):
                     'it@girtonspringball.com',
                     recipients,
                 )
+                user.select_ticket_kind(form.cleaned_data['kind'])
             else:
                 messages.add_message(
                     request,
@@ -459,7 +460,7 @@ def buy_change(request, ref=None):
             )
             recipients = [name_change.new_email, ticket.purchaser.email]
             send_mail(
-                'GSB23 Ticketing: Name Change Request',
+                'GSB24 Ticketing: Name Change Request',
                 msg,
                 'it@girtonspringball.com',
                 recipients,

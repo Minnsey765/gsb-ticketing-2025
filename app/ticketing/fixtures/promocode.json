@@ -7,5 +7,14 @@
       "value": "hehehahahuhu",
       "description": "Allows alumni to access the account creation portal (one-time only)."
     }
+  },
+  {
+    "model": "ticketing.PromoCode",
+    "pk": 2,
+    "fields": {
+      "enum": "BURSARY_ENABLE",
+      "value": "ehehehehehehe",
+      "description": "Allows bursary students to access the discounted bursary rates"
+    }
   }
 ]
