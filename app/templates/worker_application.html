@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style%}
+    body {
+    background-color: #FCFBF4;
+    }
+{% endblock %}
+
+{% block main %}
+    <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3 text-center">
+            <h4 class="my-0 fw-normal">Apply to work at the Ball</h4>
+        </div>
+        <div class="card-body">
+            {% if worker_form.errors %}
+                {% include "partials/form_errors.html" with form=worker_form only %}
+            {% endif %}
+            <form action="{% url 'worker_application' %}" method="post" class="mb-3" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3 row">
+                    <label for="{{worker_form.email.id_for_label}}" class="col-lg-4 col-form-label">Email</label>
+                    <div class="col-lg-8">
+                        <input name="{{ worker_form.email.html_name }}" type="input" class="form-control " id="{{worker_form.email.id_for_label}}" value="{{worker_form.email.value}}">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="{{worker_form.name.id_for_label}}" class="col-lg-4 col-form-label">First name</label>
+                    <div class="col-lg-8">
+                        <input name="{{ worker_form.name.html_name }}" type="input" class="form-control " id="{{worker_form.name.id_for_label}}" value="{{worker_form.name.value}}">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="{{worker_form.surname.id_for_label}}" class="col-lg-4 col-form-label">Surname</label>
+                    <div class="col-lg-8">
+                        <input name="{{ worker_form.surname.html_name }}" type="input" class="form-control " id="{{worker_form.surname.id_for_label}}" value="{{worker_form.surname.value}}">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="{{worker_form.cv.id_for_label}}" class="col-lg-4 col-form-label">Upload CV</label>
+                    <div class="col-lg-8">
+                        <input name="{{ worker_form.cv.html_name }}" type="file" class="form-control-file" id="{{worker_form.cv.id_for_label}}" value="{{worker_form.cv.value}}">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="{{worker_form.cover_letter.id_for_label}}" class="col-lg-4 col-form-label">Upload cover letter</label>
+                    <div class="col-lg-8">
+                        <input name="{{ worker_form.cv.html_name }}" type="file" class="form-control-file" id="{{worker_form.cover_letter.id_for_label}}" value="{{worker_form.cv.value}}">
+                    </div>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary btn-gsb-alum" type="submit">Submit Application</button>
+            </form>
+            <p>We'll try to get back to you soon</p>
+        </div>
+    </div>
+{% endblock %}
