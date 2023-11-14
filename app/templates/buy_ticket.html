@@ -92,7 +92,7 @@
                 <label for="{{form.verif.id_for_label}}" class="form-label">Promo code
                 </label>
                 <input type="text" class="form-control" id="{{form.verif.id_for_label}}" value="{{form.verif.value}}"
-                name="{{form.verif.html_name}}"/>
+                    name="{{form.verif.html_name}}"/>
                 <div class="form-text">
                     Enter the verification code issued to you if you are purchasing an alumni or bursary ticket.
                 </div>
@@ -111,45 +111,61 @@
                     <label class="form-check-label">
                         I generally do not drink alcohol
                     </label>
-                </div> 
+                </div>
             </div>
             <div class="mb-3">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="true" name="{{form.is_ubus.html_name}}">
                     <label class="form-check-label">
-                        I would be interested in using a early-morning / late-night UBus service 
+                        I would be interested in using a UBus service to get to the ball
                     </label>
                 </div>
             </div>
-        </div>
-            <div class="form-text">
-                Any accesibility requirements should be made known at the earliest instance to the <a href="mailto:gsb24accessibility@gmail.com">Sustainability and Accessibility Officer</a>.
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="true" name="{{form.is_departure_bus.html_name}}">
+                    <label class="form-check-label">
+                        I would be interested in a bus service leaving the ball (Specify destination afterwards)
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="{{form.bus_destination.id_for_label}}" class="form-label">Where to?</label>
+                <select class="form-select" name="{{form.bus_destination.html_name}}" id="{{form.bus_destination.id_for_label}}">
+                    {% for value, destination in form.fields.bus_destination.choices %}
+                        <option value="{{ value|stringformat:'s' }}">{{ destination }}</option>
+                    {% endfor %}
+                </select>
             </div>
         </div>
-        <div class="bg-light p-3 rounded mb-4">
-            <h4>Payment details</h4>
-            <div class="row mb-3">
-                <label for="buy_ticket_membership" class="col-sm-4 col-form-label"
-                >Method</label
-                    >
-                    <div class="col-sm-8">
-                        <select id="buy_ticket_membership" class="form-select" disabled>
-                            <option selected>{{user.kind.payment_method.name}}</option>
-                        </select>
-                    </div>
-                    <div id="buy_ticket_membership_help" class="form-text">
-                        Members of {{ user.kind.name }} are restricted to paying by {{ user.kind.payment_method.name }}.
-                    </div>
+        <div class="form-text">
+            Any accesibility requirements should be made known at the earliest instance to the <a href="mailto:gsb24accessibility@gmail.com">Sustainability and Accessibility Officer</a>.
+        </div>
+    </div>
+    <div class="bg-light p-3 rounded mb-4">
+        <h4>Payment details</h4>
+        <div class="row mb-3">
+            <label for="buy_ticket_membership" class="col-sm-4 col-form-label"
+            >Method</label
+                >
+                <div class="col-sm-8">
+                    <select id="buy_ticket_membership" class="form-select" disabled>
+                        <option selected>{{user.kind.payment_method.name}}</option>
+                    </select>
                 </div>
-                <div class="row">
-                    <div class="col-4">Amount (£)</div>
-                    <div class="col-8 text-end" id="buy_ticket_amount">
-                    </div>
+                <div id="buy_ticket_membership_help" class="form-text">
+                    Members of {{ user.kind.name }} are restricted to paying by {{ user.kind.payment_method.name }}.
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-4">Amount (£)</div>
+                <div class="col-8 text-end" id="buy_ticket_amount">
+                </div>
+            </div>
 
-            </div>
-            <button type="submit" class="btn btn-lg btn-primary">Purchase</button>
-        </form>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary">Purchase</button>
+    </form>
 {% endblock %}
 
 {% block scripts %}

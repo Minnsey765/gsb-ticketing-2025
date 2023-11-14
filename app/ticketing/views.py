@@ -309,11 +309,14 @@ def worker_application(request):
                 messages.SUCCESS,
                 'Application Submitted!',
             )
-            return render(request,  "worker_application.html",
+            return render(
+                request,
+                "worker_application.html",
                 {
                     "title": "Worker Application Form",
                     "worker_form": form,
-                },)
+                },
+            )
         else:
             messages.add_message(
                 request,
@@ -391,6 +394,8 @@ def buy_ticket(request):
                 is_veg=form.cleaned_data['is_veg'],
                 is_alc=form.cleaned_data['is_alc'],
                 is_ubus=form.cleaned_data['is_ubus'],
+                is_departure_bus=form.cleaned_data['is_departure_bus'],
+                bus_destination=form.cleaned_data['bus_destination'],
                 payment_method=user.kind.payment_method,
             )
             allocation = ticket.kind.allocation

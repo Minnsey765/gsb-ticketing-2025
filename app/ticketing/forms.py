@@ -37,7 +37,17 @@ class BuyTicketForm(forms.Form):
     is_alc = forms.BooleanField(required=False)
     is_veg = forms.BooleanField(required=False)
     is_ubus = forms.BooleanField(required=False)
-    verif = forms.CharField(max_length=100, initial="")
+    is_departure_bus = forms.BooleanField(required=False)
+
+    bus_destination_choices = [
+        ('unselected', 'Optional'),
+        ('station', 'Cambridge Train Station'),
+        ('city_centre', 'Cambridge City Centre'),
+        ('swirles', 'Swirles Court'),
+    ]
+    bus_destination = forms.ChoiceField(choices=bus_destination_choices)
+
+    verif = forms.CharField(max_length=100, initial="", required=False)
 
     def clean_verif(self):
         data = self.cleaned_data['verif']
