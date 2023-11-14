@@ -430,7 +430,6 @@ def buy_ticket(request):
                     'it@girtonspringball.com',
                     recipients,
                 )
-                user.select_ticket_kind(form.cleaned_data['kind'])
             else:
                 messages.add_message(
                     request,
