@@ -1,0 +1,10 @@
+{
+    "production": {
+        "aws_region": "eu-west-2",
+        "django_settings": "app.settings",
+        "profile_name": "default",
+        "project_name": "gsb-ticketing",
+        "runtime": "python3.11",
+        "s3_bucket": "gsb-ticketing"
+    }
+}

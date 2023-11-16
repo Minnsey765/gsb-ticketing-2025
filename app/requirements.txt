@@ -8,3 +8,4 @@ psycopg2
 requests
 simpleanalytics
 whitenoise
+django-s3-storage

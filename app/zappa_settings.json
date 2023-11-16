@@ -1,0 +1,15 @@
+{
+    "production": {
+        "aws_region": "eu-west-2",
+        "django_settings": "settings.production",
+        "profile_name": "default",
+        "domain": "ticketing.girtonspringball.com",
+        "certificate_arn": "arn:aws:acm:eu-west-2:845833619769:certificate/30bd20a9-0497-453c-962b-e70500165399",
+        "project_name": "app",
+        "runtime": "python3.11",
+        "vpc_config" : {
+                "SubnetIds": [ "subnet-04e00d002c39bc060","subnet-0d32e847d8ea12928", "subnet-0202fdbad40421a62" ],
+                "SecurityGroupIds": [ "sg-0fa51d8cf2b8e4269" ]
+            }
+        }
+}
