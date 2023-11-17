@@ -33,8 +33,6 @@
       "ticket_kinds": [
         ["S"],
         ["QJ"],
-        ["S_BURSARY"], 
-        ["QJ_BURSARY"],
         ["S_EXT"],
         ["QJ_EXT"],
         ["S_OLD_COMM"],
@@ -59,8 +57,6 @@
       "ticket_kinds": [
         ["S"],
         ["QJ"],
-        ["S_BURSARY"], 
-        ["QJ_BURSARY"],
         ["S_EXT"],
         ["QJ_EXT"],
         ["S_ALUM"],

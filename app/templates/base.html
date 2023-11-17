@@ -39,10 +39,10 @@
         <link rel="manifest" href="{% static 'site.webmanifest' %}" />
 
         <!--important head stuff -->
-        <title>{{ title | default:"Home"}} | GSB23 Ticketing</title>
+        <title>{{ title | default:"Home"}} | GSB24 Ticketing</title>
 
         <!-- SEO tags -->
-        <meta property="og:title" content="GSB23 Ticketing" />
+        <meta property="og:title" content="GSB24 Ticketing" />
         <meta name="robots" content="noarchive" />
         <meta name="description" content="GSB 2024 Ticketing System" />
         <meta property="og:description" content="GSB 2024 Ticketing System" />
@@ -58,7 +58,7 @@
         </style>
         {% simpleanalytics_sync %}
     </head>
-    <body>
+    <body style="min-height: 100vh">
         {% simpleanalytics_noscript_block %}
         <div
             style="
@@ -175,7 +175,10 @@
                     {% endif %}
                 {% endfor %}
             {% endif %}
-            <main class="container mb-3 p-3 pb-0">{% block main %}{% endblock %}</main>
+            <main class="container mb-3 p-3 pb-0" style="min-height: 62vh; display: flex; flex-direction: column">{% block main %}{% endblock %}
+            <div style="flex-grow:1"></div>
+
+            </main>
             <footer
                 style="
                     background: url('{% static 'images/grass.png' %}') no-repeat;
@@ -186,7 +189,7 @@
                 class="text-center p-3"
             >
                 <p class="mb-0 text-light">
-                    GSB ticketing brought to you by Peter and Yuvraj
+                    GSB ticketing brought to you by Peter Jackson and Yuvraj Dubey
                 </p>
                 <p class="mb-0 text-light">
                     Art by Elliot Hamilton-Croft and Maddy Guha

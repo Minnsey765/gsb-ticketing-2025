@@ -12,6 +12,7 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from google.cloud import storage
 from google.oauth2.service_account import Credentials
+import csv
 
 from .forms import (
     BuyTicketForm,
@@ -197,21 +198,29 @@ def signup(request):
         else:
             return render(request, "signup.html", {"title": "Signup", "form": form})
     else:
-        try:
-            lookup_res = requests.get(
-                'https://mw781.user.srcf.net/lookup-gsb.cgi',
-                params={"user": user.username},
-                timeout=10,
-            )
-            lookup_res = lookup_res.json()
-        except:
-            lookup_res = {}
-        status = match_identity(user, lookup_res)
+        kind_csv_id = "UCAM_OTHER"
+        with open('ticketing/lookup.csv') as csvFile:
+            reader = csv.reader(csvFile)
+            for row in reader:
+                if(len(row) > 1):
+                    if row[0] == user.username:
+                        kind_csv_id = row[1]
+                    print(row[0] + " " + row[1])
+
+        allowed_user = AllowedUser.objects.filter(username=user.username)
+        if allowed_user.exists():
+            status = UserKind.objects.get(enum=allowed_user.first().userkind_enum)
+        else:
+            status = UserKind.objects.get(enum=kind_csv_id)
 
         # db
         user.kind = status
         user.save()
 
+        name = ""
+        surname = ""
+
+        """
         # this is non-ideal, but it's a reasonable compromise
         visible_name = lookup_res.get('visibleName', "")
         if visible_name == "":
@@ -222,7 +231,10 @@ def signup(request):
             name = split_name[0]
             surname = split_name[1]
         # don't guess email if they're an alum
+        """
         email = f'{user.username}@cam.ac.uk' if not user.profile.raven_for_life else ''
+
+
         form = SignupForm(
             initial={
                 "status": user.kind.name,
@@ -424,12 +436,15 @@ def buy_ticket(request):
                 # both purchaser and attendee should receive email
                 if not ticket.is_own:
                     recipients.append(ticket.purchaser.email)
+                
+                
                 send_mail(
-                    'GSB23 Ticketing: Ticket Confirmation',
+                    'GSB24 Ticketing: Ticket Confirmation',
                     msg,
                     'it@girtonspringball.com',
                     recipients,
                 )
+                
             else:
                 messages.add_message(
                     request,

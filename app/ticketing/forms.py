@@ -52,13 +52,14 @@ class BuyTicketForm(forms.Form):
     def clean_verif(self):
         data = self.cleaned_data['verif']
         alum_code = PromoCode.objects.get(enum='ALUM_SIGNUP')
-        bursary_code = PromoCode.objects.get(enum='BURSARY_ENABLE')
+        #bursary_code = PromoCode.objects.get(enum='BURSARY_ENABLE')
         kind = self.cleaned_data.get('kind')
         print(kind)
         if data == alum_code.value:
             raise ValidationError(
                 "You are logged in with a Raven account! Please logout and use the Alumni sign in option."
             )
+        """
         elif (
             kind
             and data != bursary_code.value
@@ -66,7 +67,7 @@ class BuyTicketForm(forms.Form):
         ):
             print(self.cleaned_data['kind'])
             raise ValidationError("Invalid code for Bursary ticket!")
-
+        """
         return data
 
 

@@ -25,7 +25,43 @@
     }
 {% endblock %}
 {% block main %}
-    <h1 class="fw-bold rainbow-text p-2" style="font-size:calc(3rem + 2.7vw)">Patience, please!</h1>
-    <p class="display-4"><a href="https://i.pinimg.com/originals/6a/ff/e7/6affe715379ae38e72dd430ca22e6f68.jpg">Our engineers</a> have put on their <span class="rainbow-text">hard hats</span> and are hard at work on that!</p>
-    <p class="text-muted">Copyright (c) 1995 Microsoft Corporation. All rights reserved.</p>
+    <h1 class="fw-bold rainbow-text p-2" style="font-size:calc(3rem + 2.7vw)">Tickets are coming soon!</h1>
+    <p class="display-4"><a href="https://i.pinimg.com/originals/6a/ff/e7/6affe715379ae38e72dd430ca22e6f68.jpg">Our engineers</a> have worked tirelessly and have managed to repair the platform! We <span class="rainbow-text">can't wait</span> to welcome you to this year's Girton Spring Ball!</p>
+    
+    <p class="mt-5 text-center">Time Remaining:</p>
+    <p class="display-2 rainbow-text text-center" id="demo"></p>
+    <p class="text-muted text-center">Copyright (c) 1996 Microsoft Corporation. All rights reserved.</p>
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("Nov 19, 2023 12:00:00").getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function y() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("demo").innerHTML = "Refresh your page!";
+            }
+            return y;
+        }(), 1000);
+    </script>
+
+
 {% endblock %}
