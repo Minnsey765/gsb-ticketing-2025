@@ -19,34 +19,107 @@
             <form action="{% url 'worker_application' %}" method="post" class="mb-3" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="mb-3 row">
-                    <label for="{{worker_form.email.id_for_label}}" class="col-lg-4 col-form-label">Email</label>
-                    <div class="col-lg-8">
-                        <input name="{{ worker_form.email.html_name }}" type="input" class="form-control " id="{{worker_form.email.id_for_label}}" value="{{worker_form.email.value}}">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="{{worker_form.name.id_for_label}}" class="col-lg-4 col-form-label">Name</label>
+                    <label for="{{worker_form.name.id_for_label}}" class="col-lg-4 col-form-label">Full Name</label>
                     <div class="col-lg-8">
                         <input name="{{ worker_form.name.html_name }}" type="input" class="form-control " id="{{worker_form.name.id_for_label}}" value="{{worker_form.name.value}}">
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="{{worker_form.cv.id_for_label}}" class="col-lg-4 col-form-label">Upload CV</label>
+                    <label for="{{worker_form.crisd.id_for_label}}" class="col-lg-4 col-form-label">CRSid</label>
                     <div class="col-lg-8">
-                        <input name="{{ worker_form.cv.html_name }}" type="file" class="form-control-file" id="{{worker_form.cv.id_for_label}}" value="{{worker_form.cv.value}}">
+                        <input name="{{ worker_form.crisd.html_name }}" type="input" class="form-control " id="{{worker_form.crisd.id_for_label}}" value="{{worker_form.crisd.value}}">
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="{{worker_form.cover_letter.id_for_label}}" class="col-lg-4 col-form-label">Upload cover letter</label>
+                    <label for="{{signup_form.dob.id_for_label}}" class="col-lg-4 col-form-label">Date of Birth</label>
                     <div class="col-lg-8">
-                        <input name="{{ worker_form.cover_letter.html_name }}" type="file" class="form-control-file" id="{{worker_form.cover_letter.id_for_label}}" value="{{worker_form.cover_letter.value}}">
+                        <input name="{{ signup_form.dob.html_name }}" type="date" class="form-control " id="{{signup_form.dob.id_for_label}}" value="{{signup_form.dob.value}}">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="{{form.college.id_for_label}}" class="form-label">College</label>
+                    <select class="form-select" name="{{form.college.html_name}}" id="{{form.college.id_for_label}}">
+                        {% for value, college in form.fields.college.choices %}
+                            <option value="{{ value|stringformat:'s' }}">{{ college }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="{{form.choice1.id_for_label}}" class="form-label">First Choice</label>
+                    <select class="form-select" name="{{form.choice1.html_name}}" id="{{form.choice1.id_for_label}}">
+                        {% for choice in form.fields.choice1.queryset %}
+                            <option value="{{ kind.id|stringformat:'s' }}">{{ choice.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="{{form.choice2.id_for_label}}" class="form-label">Second Choice</label>
+                    <select class="form-select" name="{{form.choice2.html_name}}" id="{{form.choice2.id_for_label}}">
+                        {% for choice in form.fields.choice2.queryset %}
+                            <option value="{{ kind.id|stringformat:'s' }}">{{ choice.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="true" name ="{{form.previous_exp.html_name}}">
+                        <label class="form-check-label">
+                            Are you applying for a supervisor role. PLEASE NOTE: applications for supervisor roles will involve a short interview over Zoom in January.
+                        </label>
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="{{worker_form.role.id_for_label}}" class="col-lg-4 col-form-label">Role</label>
+                    <label for="{{worker_form.reason.id_for_label}}" class="col-lg-4 col-form-label">Reason</label>
                     <div class="col-lg-8">
-                        <input readonly name="{{ worker_form.role.html_name }}" type="input" class="form-control-plaintext " id="{{worker_form.role.id_for_label}}" value="{{worker_form.role.value}}">
+                        <input name="{{ worker_form.reason.html_name }}" type="input" class="form-control " id="{{worker_form.reason.id_for_label}}" value="{{worker_form.reason.value}}">
                     </div>
+                    <span class="form-text">
+                        Why do you want to work at Girton Spring Ball 2024? (Yeah yeah money ik, but give a 'proper' reason)
+                    </span>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="true" name ="{{form.previous_exp.html_name}}">
+                        <label class="form-check-label">
+                            Have you worked at a 'May' Ball before?
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="{{worker_form.exp_desc.id_for_label}}" class="col-lg-4 col-form-label">Experience details</label>
+                    <div class="col-lg-8">
+                        <input name="{{ worker_form.exp_desc.html_name }}" type="input" class="form-control " id="{{worker_form.exp_desc.id_for_label}}" value="{{worker_form.exp_desc.value}}">
+                    </div>
+                    <span class="form-text">
+                        If you have, please include some details about your experience.
+                    </span>
+                </div>
+                <div class="mb-3 row">
+                    <label for="{{worker_form.other_exp.id_for_label}}" class="col-lg-4 col-form-label">Other Experience</label>
+                    <div class="col-lg-8">
+                        <input name="{{ worker_form.other_exp.html_name }}" type="input" class="form-control " id="{{worker_form.other_exp.id_for_label}}" value="{{worker_form.other_exp.value}}">
+                    </div>
+                    <span class="form-text">
+                        What other experience do you have that you feel would help you in this role?
+                    </span>
+                </div>
+                <div class="mb-3 row">
+                    <label for="{{worker_form.qualities.id_for_label}}" class="col-lg-4 col-form-label">Qualities</label>
+                    <div class="col-lg-8">
+                        <input name="{{ worker_form.qualities.html_name }}" type="input" class="form-control " id="{{worker_form.qualities.id_for_label}}" value="{{worker_form.qualities.value}}">
+                    </div>
+                    <span class="form-text">
+                        What qualities do you have that you feel make you a good fit for this role?
+                    </span>
+                </div>
+                <div class="mb-3 row">
+                    <label for="{{worker_form.friends.id_for_label}}" class="col-lg-4 col-form-label">Co-Worker Requests</label>
+                    <div class="col-lg-8">
+                        <input name="{{ worker_form.friends.html_name }}" type="input" class="form-control " id="{{worker_form.friends.id_for_label}}" value="{{worker_form.friends.value}}">
+                    </div>
+                    <span class="form-text">
+                        Please list the names of anyone you wish to work with: (please note this will not be guaranteed, but we will try to accommodate what we can!)
+                    </span>
                 </div>
                 <button class="w-100 btn btn-lg btn-primary btn-gsb-alum" type="submit">Submit Application</button>
             </form>

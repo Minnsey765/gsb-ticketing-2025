@@ -277,20 +277,25 @@ def worker_docs(request, application, document):
 
 
 def worker_application(request):
+    worker_roles_qs = 1  # Need to get this from db somehow
 
-    if request.method == 'GET':
-        role = request.GET.get('selected_role')
-        form = WorkerApplicationForm(initial={'role': role})
-        return render(request, 'worker_application.html', {'worker_form': form})
-
-    elif request.method == 'POST':
-        form = WorkerApplicationForm()
+    if request.method == 'POST':
+        form = WorkerApplicationForm(worker_roles_qs)
         if form.is_valid():
             application = WorkerApplication(
                 name=form.cleaned_data['name'],
-                email=form.cleaned_data['email'],
-                cv=form.cleaned_data['cv'],
-                cover_letter=form.cleaned_data['cover_letter'],
+                crsid=form.cleaned_data['crsid'],
+                dob=form.cleaned_data['dob'],
+                college=form.cleaned_data['college'],
+                choice1=form.cleaned_data['choice1'],
+                choice2=form.cleaned_data['choice2'],
+                supervisor=form.cleaned_data['supervisor'],
+                reason=form.cleaned_data['reason'],
+                previous_exp=form.cleaned_data['previous_exp'],
+                exp_desc=form.cleaned_data['exp_desc'],
+                other_exp=form.cleaned_data['other_exp'],
+                qualities=form.cleaned_data['qualities'],
+                friends=form.cleaned_data['friends'],
             )
             # send confirmation email
             msg = render_to_string(
@@ -332,7 +337,15 @@ def worker_application(request):
                 },
             )
     else:
-        return HttpResponse(status=405)
+        form = WorkerApplicationForm(worker_roles_qs)
+        return render(
+            request,
+            "worker_application.html",
+            {
+                "title": "Worker Application Form",
+                "worker_form": form,
+            },
+        )
 
 
 @login_required
