@@ -38,7 +38,7 @@ class BuyTicketForm(forms.Form):
     is_veg = forms.BooleanField(required=False)
     is_ubus = forms.BooleanField(required=False)
     is_departure_bus = forms.BooleanField(required=False)
-
+    # Probably shouldn't hardcode this lol
     bus_destination_choices = [
         ('unselected', 'Optional'),
         ('station', 'Cambridge Train Station'),
@@ -72,11 +72,58 @@ class BuyTicketForm(forms.Form):
 
 
 class WorkerApplicationForm(forms.Form):
+    def __init__(self, worker_roles_qs, *args, **kwargs):
+        super(WorkerApplicationForm, self).__init__(*args, **kwargs)
+        self.fields['choice1'].queryset = worker_roles_qs
+        self.fields['choice2'].queryset = worker_roles_qs
+
+    # Probably shouldn't hardcode this either
+    colleges = [
+        ("christs", "Christ's College"),
+        ("churchill", "Churchill College"),
+        ("clare", "Clare College"),
+        ("clarehall", "Clare Hall"),
+        ("corpuschristi", "Corpus Christi College"),
+        ("darwin", "Darwin College"),
+        ("downing", "Downing College"),
+        ("emmanuel", "Emmanuel College"),
+        ("fitzwilliam", "Fitzwilliam College"),
+        ("girton", "Girton College"),
+        ("cauis", "Gonville & Caius College"),
+        ("hometon", "Homerton College"),
+        ("hugheshall", "Hughes Hall"),
+        ("jesus", "Jesus College"),
+        ("kings", "King's College"),
+        ("lucycavendish", "Lucy Cavendish College"),
+        ("magdalene", "Magdalene College"),
+        ("murrayedwards", "Murray Edwards College"),
+        ("newnham", "Newnham College"),
+        ("pembroke", "Pembroke College"),
+        ("peterhouse", "Peterhouse"),
+        ("queens", "Queens' College"),
+        ("robinson", "Robinson College"),
+        ("selwyn", "Selwyn College"),
+        ("sidneysussex", "Sidney Sussex College"),
+        ("stcatherines", "St Catharine's College"),
+        ("stedmunds", "St Edmund's College"),
+        ("stjohns", "St John's College"),
+        ("trinity", "Trinity College"),
+        ("trinityhall", "Trinity Hall"),
+        ("wolfson", "Wolfson College"),
+    ]
     name = forms.CharField(max_length=100, initial="")
-    email = forms.EmailField(initial="")
-    cv = forms.FileField(allow_empty_file=False)
-    cover_letter = forms.FileField(allow_empty_file=False)
-    role = forms.CharField(max_length=100, initial="")
+    crsid = forms.CharField(max_length=8, initial="")
+    dob = forms.DateField()
+    college = forms.ChoiceField(choices=colleges)
+    choice1 = forms.ModelChoiceField(queryset=None, initial=1)
+    choice2 = forms.ModelChoiceField(queryset=None, initial=1)
+    supervisor = forms.BooleanField(required=False)
+    reason = forms.CharField(initial="")
+    previous_exp = forms.BooleanField(required=False)
+    exp_desc = forms.CharField(initial="")
+    other_exp = forms.CharField(initial="")
+    qualities = forms.CharField(initial="")
+    friends = forms.CharField(initial="")
 
 
 class GuestLoginForm(forms.Form):
