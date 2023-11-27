@@ -430,6 +430,7 @@ def buy_ticket(request):
                     allocation.is_active = False
                     allocation.save()
 
+                """
                 # send confirmation email
                 msg = render_to_string("emails/buy.txt", {"ticket": ticket})
                 recipients = [ticket.email]
@@ -444,6 +445,7 @@ def buy_ticket(request):
                     'it@girtonspringball.com',
                     recipients,
                 )
+                """
                 
             else:
                 messages.add_message(

@@ -33,3 +33,7 @@ body {
   --bs-btn-active-bg: #373876;
   --bs-btn-active-border-color: #373876;
 }
+
+body {
+  font-family: 'Red Hat Text', sans-serif;
+}

@@ -9,3 +9,4 @@ requests
 simpleanalytics
 whitenoise
 django-s3-storage
+django_ses

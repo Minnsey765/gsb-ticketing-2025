@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'ucamwebauth',
     'simpleanalytics',
     'django_s3_storage',
+    'django_ses',
 ]
 
 MIDDLEWARE = [
