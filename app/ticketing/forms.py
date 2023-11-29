@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 
-from .models import PromoCode, TicketKind, User
+from .models import PromoCode, TicketKind, User, WorkerApplicationRole
 
 
 class SignupForm(forms.Form):
@@ -55,9 +55,9 @@ class BuyTicketForm(forms.Form):
         #bursary_code = PromoCode.objects.get(enum='BURSARY_ENABLE')
         kind = self.cleaned_data.get('kind')
         print(kind)
-        if data == alum_code.value:
+        if (data != alum_code.value and (kind.enum == 'S_ALUM' or kind.enum == 'QJ_ALUM')):
             raise ValidationError(
-                "You are logged in with a Raven account! Please logout and use the Alumni sign in option."
+                "Invalid Alumni verification code."
             )
         """
         elif (
@@ -72,12 +72,12 @@ class BuyTicketForm(forms.Form):
 
 
 class WorkerApplicationForm(forms.Form):
+     # Probably shouldn't hardcode this either
     def __init__(self, worker_roles_qs, *args, **kwargs):
         super(WorkerApplicationForm, self).__init__(*args, **kwargs)
-        self.fields['choice1'].queryset = worker_roles_qs
-        self.fields['choice2'].queryset = worker_roles_qs
-
-    # Probably shouldn't hardcode this either
+        self.fields['choice1'].queryset = worker_roles_qs.all()
+        self.fields['choice2'].queryset = worker_roles_qs.all()
+    
     colleges = [
         ("christs", "Christ's College"),
         ("churchill", "Churchill College"),
@@ -112,11 +112,11 @@ class WorkerApplicationForm(forms.Form):
         ("wolfson", "Wolfson College"),
     ]
     name = forms.CharField(max_length=100, initial="")
-    crsid = forms.CharField(max_length=8, initial="")
-    dob = forms.DateField()
-    college = forms.ChoiceField(choices=colleges)
+    crsid = forms.CharField(max_length=10, initial="")
+    dob = forms.DateField(initial="2001-01-01")
+    college = forms.ChoiceField(choices=colleges, initial="girton")
     choice1 = forms.ModelChoiceField(queryset=None, initial=1)
-    choice2 = forms.ModelChoiceField(queryset=None, initial=1)
+    choice2 = forms.ModelChoiceField(queryset=None, initial=2)
     supervisor = forms.BooleanField(required=False)
     reason = forms.CharField(initial="")
     previous_exp = forms.BooleanField(required=False)

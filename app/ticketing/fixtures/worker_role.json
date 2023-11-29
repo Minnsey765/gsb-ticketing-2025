@@ -3,30 +3,51 @@
         "model": "ticketing.WorkerApplicationRole",
         "pk": 1,
         "fields": {
-            "enum": "TEMP1",
-            "title": "Temporary Role 1",
-            "pay": 14.90,
-            "description": "lorem ipsum dolor"
+            "enum": "BAR_STAFF",
+            "title": "Bar Staff",
+            "pay": 11.44,
+            "description": "You will be expected to work the whole ball, starting at 8pm until after the guests leave at 5am. Staff may be involved in making and serving drinks to guests, moving stock between bars, and clearing up their area before they leave."
         }
     },
     {
         "model": "ticketing.WorkerApplicationRole",
         "pk": 2,
         "fields": {
-            "enum": "TEMP2",
-            "title": "Temporary Role 2",
-            "pay": 12.90,
-            "description": "lorem ipsum dolor"
+            "enum": "GENERAL",
+            "title": "General Worker",
+            "pay": 11.44,
+            "description": "You may be required to fill a variety of roles as needed, including running errands, setting up aesthetics and decoration, clearing up after the ball, and taking bin bags to designated waste areas. Staff should be enthusiastic and flexible and will be expected to work the whole ball unless otherwise specified."
         }
     },
     {
         "model": "ticketing.WorkerApplicationRole",
         "pk": 3,
         "fields": {
-            "enum": "TEMP3",
-            "title": "Temporary Role 3",
-            "pay": 13.90,
-            "description": "lorem ipsum dolor"
+            "enum": "MUS_ENT_RUNNER",
+            "title": "Music/Ents Runners",
+            "pay": 11.44,
+            "description": "You will be responsible for running music or other entertainment to their locations and green rooms prior to and after their performances, and ensuring they are in the right places at the right times."
+        }
+    },
+    {
+        "model": "ticketing.WorkerApplicationRole",
+        "pk": 4,
+        "fields": {
+            "enum": "SECURITY_FIRE",
+            "title": "Security Worker/Fire Stewards",
+            "pay": 11.44,
+            "description": "Staff will be stationed at specific points during the night as needed and will be responsible for checking wristbands, keeping guests out of restricted areas, and taking control of an evacuation should it be necessary at any point."
+        }
+    },
+    {
+        "model": "ticketing.WorkerApplicationRole",
+        "pk": 5,
+        "fields": {
+            "enum": "AREA_SUP",
+            "title": "Area Supervisor",
+            "pay": 11.44,
+            "description": "You will be expected to arrive at 7pm (2 hours before the start of the ball) for a briefing. Supervisors will be responsible for managing an area or a bar, monitoring other workers in their roles, ensuring they get breaks as required, and reporting to the personnel officer throughout the night."
         }
     }
+    
 ]

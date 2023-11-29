@@ -37,3 +37,7 @@ body {
 body {
   font-family: 'Red Hat Text', sans-serif;
 }
+
+textarea {
+  resize: none;
+}

@@ -342,17 +342,35 @@ class WorkerApplicationRole(models.Model):
 
 class WorkerApplication(models.Model):
     name = models.CharField(max_length=100)
-    email = models.EmailField()
-    cv = models.FileField(upload_to=gen_workerapp_path)
-    uuid = models.CharField(max_length=13, default=gen_workerapp_id)
-    cover_letter = models.FileField(upload_to=gen_workerapp_path)
+    crsid = models.CharField(max_length=20, default='')
+    dob = models.DateField(default='2001-01-01')
+
+    college = models.CharField(max_length=100, default='unselected')
+
+    supervisor = models.BooleanField(default=False)
+    reason = models.TextField(max_length=400, default='')
+
+    previous_exp = models.BooleanField(default=False)
+    exp_desc = models.TextField(max_length=600, default='')
+    other_exp = models.TextField(max_length=600, default='')
+
+    qualities = models.CharField(max_length=300, default='')
+    friends = models.CharField(max_length=450, default='')
+
 
     # application role
-    role = models.ForeignKey(
+    choice1 = models.ForeignKey(
         WorkerApplicationRole,
         on_delete=models.CASCADE,
-        related_name='worker_applications',
+        related_name='worker_app_choice_1',
         default=1,
+    )
+
+    choice2 = models.ForeignKey(
+        WorkerApplicationRole,
+        on_delete=models.CASCADE,
+        related_name='worker_app_choice_2',
+        default=2,
     )
 
     class Meta:

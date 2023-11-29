@@ -71,17 +71,21 @@ class UserAdmin(UserAdminOriginal):
 
 class WorkerApplicationAdmin(admin.ModelAdmin):
 
-    list_display = ("name", "email", "cv", "cover_letter", "role")
-    
+    list_display = ("name", "email", "college", "choice1_title", "choice2_title")
+
+    def email(self, obj):
+        return f'{obj.crsid}@cam.ac.uk'
+
+    def choice1_title(self, obj):
+        return obj.choice1.title
+
+    def choice2_title(self, obj):
+        return obj.choice2.title
+
     @admin.display(description='Application count')
     def worker_applications_submitted(self, obj):
         return WorkerApplication.objects.filter(kind=obj).count()
-    
-    def cover_letter(self, obj):
-        url = obj.pdf_file.url
-        html = '<embed src="{url}" type="application/pdf">'
-        formatted_html = format_html(html.format(url=obj.cover.url))
-        return formatted_html
+
 
 
 class UserKindAdmin(admin.ModelAdmin):

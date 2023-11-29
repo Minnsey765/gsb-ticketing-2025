@@ -31,6 +31,7 @@ from .models import (
     User,
     UserKind,
     WorkerApplication,
+    WorkerApplicationRole,
 )
 from .utils import login_required, match_identity, validate_ticket_ref
 
@@ -289,10 +290,11 @@ def worker_docs(request, application, document):
 
 
 def worker_application(request):
-    worker_roles_qs = 1  # Need to get this from db somehow
+
+    worker_roles_qs = WorkerApplicationRole.objects  # Need to get this from db somehow
 
     if request.method == 'POST':
-        form = WorkerApplicationForm(worker_roles_qs)
+        form = WorkerApplicationForm(worker_roles_qs, request.POST)
         if form.is_valid():
             application = WorkerApplication(
                 name=form.cleaned_data['name'],
@@ -309,12 +311,16 @@ def worker_application(request):
                 qualities=form.cleaned_data['qualities'],
                 friends=form.cleaned_data['friends'],
             )
+
+            application.save()
             # send confirmation email
             msg = render_to_string(
-                "emails/worker_application.txt", {"name": application.name}
+                "emails/worker_application.txt", {"application": application}
             )
-            recipients = [application.email]
-            # both purchaser and attendee should receive email
+            #assemble email address (from crsid)
+            
+            recipients = [f'{application.crsid}@cam.ac.uk']
+            # both admin and applicant should receive email
             send_mail(
                 'GSB24 Worker Applications: Application Received',
                 msg,
@@ -340,6 +346,9 @@ def worker_application(request):
                 messages.WARNING,
                 'Invalid Data!',
             )
+            print(form.is_valid())
+            print(form.errors)
+            
             return render(
                 request,
                 "worker_application.html",
