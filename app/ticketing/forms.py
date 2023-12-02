@@ -55,9 +55,13 @@ class BuyTicketForm(forms.Form):
         #bursary_code = PromoCode.objects.get(enum='BURSARY_ENABLE')
         kind = self.cleaned_data.get('kind')
         print(kind)
-        if (data != alum_code.value and (kind.enum == 'S_ALUM' or kind.enum == 'QJ_ALUM')):
+        if (data != alum_code.value and ('ALUM' in kind.enum)):
             raise ValidationError(
                 "Invalid Alumni verification code."
+            )
+        elif (data == alum_code.value and ('ALUM' not in kind.enum)):
+            raise ValidationError(
+                "You are logged in with a Raven account, please sign out and use the Alumni login."
             )
         """
         elif (

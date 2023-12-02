@@ -129,16 +129,17 @@
                                     <a href="https://girtonspringball.com//committee" class="nav-link" style="color: white"
                                     ><i class="bi bi-people"></i> Committee
                                     </a>
+                                </li>
                                     <!--<li class="nav-item">
                           <a href="/" class="nav-link" style="color: white"
                             ><i class="bi bi-ticket-detailed"></i> Tickets
                           </a>
                         </li>-->
-                                    <!--<li class="nav-item">
-                          <a href="{% url 'worker_application' %}" class="nav-link text-light">
-                            <i class="bi bi-screwdriver me-2"></i> Working
-                          </a>
-                        </li>-->
+                                <li class="nav-item">
+                                    <a href="{% url 'worker_application' %}" class="nav-link text-light">
+                                    <i class="bi bi-screwdriver me-2"></i> Working
+                                    </a>
+                                </li>
                                     {% if user.is_authenticated %}
                                         <li class="nav-item">
                                             <a href="{% url 'manage' %}" class="nav-link text-light"><i class="bi bi-wallet me-2"></i>My tickets</a>

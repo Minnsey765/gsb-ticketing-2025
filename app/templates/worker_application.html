@@ -23,7 +23,7 @@
             make it a night to remember for everyone involved!
             </p>
 
-            <strong class="text-center h4 mb-5">Application deadline: 14th December</strong>
+            <strong class="text-center h4 mb-5">Application deadline: 22nd December</strong>
 
             <h3 class="text-center">Available roles:</h3>
 
@@ -94,51 +94,39 @@
                     </div>
                 </div>
                 <div class="mb-3 pb-3 row">
-                    <label for="{{worker_form.reason.id_for_label}}" class="col-lg-2 col-form-label">Reason</label>
+                    <label for="{{worker_form.reason.id_for_label}}" class="col-lg-2 col-form-label my-auto text-center">Why do you want to work at Girton Spring Ball 2024?</label>
                     <div class="col-lg-10">
                         <textarea style="resize:none" rows="6" name="{{ worker_form.reason.html_name }}" type="input" class="form-control " id="{{worker_form.reason.id_for_label}}" value="{{worker_form.reason.value}}"></textarea>
                     </div>
-                    <span class="form-text">
-                        Why do you want to work at Girton Spring Ball 2024? (Yeah yeah money ik, but give a 'proper' reason)
-                    </span>
                 </div>
                 <div class="mb-3 pb-3">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="true" name ="{{worker_form.previous_exp.html_name}}">
                         <label class="form-check-label">
-                            Have you worked at a 'May' Ball before?
+                            Have you worked at a May Ball before?
                         </label>
                     </div>
                 </div>
                 <div class="mb-3 row pb-3">
-                    <label for="{{worker_form.exp_desc.id_for_label}}" class="col-lg-2 col-form-label">Experience details</label>
+                    <label for="{{worker_form.exp_desc.id_for_label}}" class="col-lg-2 col-form-label my-auto text-center">If you have worked at a May Ball previously, please include some details about your experience.</label>
                     <div class="col-lg-10">
                         <textarea style="resize:none" rows="6" name="{{ worker_form.exp_desc.html_name }}" type="input" class="form-control " id="{{worker_form.exp_desc.id_for_label}}" value="{{worker_form.exp_desc.value}}"></textarea>
                     </div>
-                    <span class="form-text">
-                        If you have, please include some details about your experience.
-                    </span>
                 </div>
                 <div class="mb-3 row pb-3">
-                    <label for="{{worker_form.other_exp.id_for_label}}" class="col-lg-2 col-form-label">Other Experience</label>
+                    <label for="{{worker_form.other_exp.id_for_label}}" class="col-lg-2 col-form-label my-auto text-center">What other experience do you have that you feel would help you in this role?</label>
                     <div class="col-lg-10">
                         <textarea style="resize:none" rows="6" name="{{ worker_form.other_exp.html_name }}" type="input" class="form-control " id="{{worker_form.other_exp.id_for_label}}" value="{{worker_form.other_exp.value}}"></textarea>
                     </div>
-                    <span class="form-text">
-                        What other experience do you have that you feel would help you in this role?
-                    </span>
                 </div>
                 <div class="mb-3 row pb-3">
-                    <label for="{{worker_form.qualities.id_for_label}}" class="col-lg-2 col-form-label">Qualities</label>
+                    <label for="{{worker_form.qualities.id_for_label}}" class="col-lg-2 col-form-label my-auto text-center">What qualities do you have that you feel make you a good fit for this role?</label>
                     <div class="col-lg-10">
                         <textarea style="resize:none" rows="6" name="{{ worker_form.qualities.html_name }}" type="input" class="form-control " id="{{worker_form.qualities.id_for_label}}" value="{{worker_form.qualities.value}}"></textarea>
                     </div>
-                    <span class="form-text">
-                        What qualities do you have that you feel make you a good fit for this role?
-                    </span>
                 </div>
                 <div class="mb-3 row pb-3">
-                    <label for="{{worker_form.friends.id_for_label}}" class="col-lg-2 col-form-label">Co-Worker Requests</label>
+                    <label for="{{worker_form.friends.id_for_label}}" class="col-lg-2 col-form-label my-auto text-center">Co-Worker Requests</label>
                     <div class="col-lg-10">
                         <input name="{{ worker_form.friends.html_name }}" type="input" class="form-control " id="{{worker_form.friends.id_for_label}}" value="{{worker_form.friends.value}}">
                     </div>
