@@ -34,7 +34,7 @@ EMAIL_HOST_USER = ""
 #EMAIL_USE_TLS = True
 #SERVER_EMAIL = f'it@girtonspringball.com'
 
-#EMAIL_HOST_PASSWORD = "***REMOVED***"
+#EMAIL_HOST_PASSWORD = ""
 #EMAIL_HOST_USER = "it@girtonspringball.com"
 
 ADMINS = [

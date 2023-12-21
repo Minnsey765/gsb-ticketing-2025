@@ -73,6 +73,11 @@ class WorkerApplicationAdmin(admin.ModelAdmin):
 
     list_display = ("name", "email", "college", "choice1_title", "choice2_title")
 
+    actions = [
+            'send_confirmation',
+            'download_worker_details',
+        ]
+
     def email(self, obj):
         return f'{obj.crsid}@cam.ac.uk'
 
@@ -86,6 +91,40 @@ class WorkerApplicationAdmin(admin.ModelAdmin):
     def worker_applications_submitted(self, obj):
         return WorkerApplication.objects.filter(kind=obj).count()
 
+    @admin.action(description='Send confirmation email')
+    def send_confirmation(self, request, queryset):
+        for application in queryset:
+            msg = render_to_string("emails/worker_application.txt", {"application": application})
+            
+            recipients = [f'{application.crsid}@cam.ac.uk']
+            # both purchaser and attendee should receive email
+   
+            send_mail(
+                'GSB24 Worker Applications: Application Received',
+                msg,
+                'it@girtonspringball.com',
+                recipients,
+            )
+        self.message_user(
+            request,
+            f'{queryset.count()} emails were successfully sent.',
+            messages.SUCCESS,
+        )
+
+    @admin.action(description='Download as CSV')
+    def download_worker_details(self, request, queryset):
+        import csv
+        import io
+
+        from django.http import HttpResponse
+
+        buffer = io.StringIO()
+        writer = csv.writer(buffer)
+        writer.writerow(["name", "crsid", "dob", "college", "supervisor", "reason for applying", "previous experience", "experience description", "other experience", "qualities", "friends"])
+        for application in queryset:
+            writer.writerow([application.name, application.crsid, application.dob, application.college, application.supervisor, application.reason, application.previous_exp, application.exp_desc, application.other_exp, application.qualities, application.friends])
+        buffer.seek(0)
+        return HttpResponse(buffer, content_type='text/csv')
 
 
 class UserKindAdmin(admin.ModelAdmin):
@@ -241,9 +280,9 @@ class TicketAdmin(admin.ModelAdmin):
 
         buffer = io.StringIO()
         writer = csv.writer(buffer)
-        writer.writerow(["name", "uuid", "kind", "dateapplied"])
+        writer.writerow(["name", "uuid", "kind", "dateapplied", "ubus?", "ubus for departure?", "ubus destination", "crsid/username"])
         for ticket in queryset:
-            writer.writerow([ticket.name, ticket.uuid, ticket.kind, ticket.date_applied])
+            writer.writerow([ticket.name, ticket.uuid, ticket.kind, ticket.date_applied, ticket.is_ubus, ticket.is_departure_bus, ticket.bus_destination, ticket.purchaser.username])
         buffer.seek(0)
         return HttpResponse(buffer, content_type='text/csv')
 

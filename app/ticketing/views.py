@@ -321,12 +321,14 @@ def worker_application(request):
             
             recipients = [f'{application.crsid}@cam.ac.uk']
             # both admin and applicant should receive email
+            """
             send_mail(
                 'GSB24 Worker Applications: Application Received',
                 msg,
                 'it@girtonspringball.com',
                 recipients,
             )
+            """
             messages.add_message(
                 request,
                 messages.SUCCESS,

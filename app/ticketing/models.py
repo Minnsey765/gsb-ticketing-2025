@@ -348,13 +348,13 @@ class WorkerApplication(models.Model):
     college = models.CharField(max_length=100, default='unselected')
 
     supervisor = models.BooleanField(default=False)
-    reason = models.TextField(max_length=400, default='')
+    reason = models.TextField(max_length=2000, default='')
 
     previous_exp = models.BooleanField(default=False)
-    exp_desc = models.TextField(max_length=600, default='')
-    other_exp = models.TextField(max_length=600, default='')
+    exp_desc = models.TextField(max_length=2000, default='')
+    other_exp = models.TextField(max_length=2000, default='')
 
-    qualities = models.CharField(max_length=300, default='')
+    qualities = models.CharField(max_length=2000, default='')
     friends = models.CharField(max_length=450, default='')
 
 

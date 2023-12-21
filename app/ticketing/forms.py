@@ -127,7 +127,7 @@ class WorkerApplicationForm(forms.Form):
     exp_desc = forms.CharField(initial="")
     other_exp = forms.CharField(initial="")
     qualities = forms.CharField(initial="")
-    friends = forms.CharField(initial="")
+    friends = forms.CharField(initial="", required=False)
 
 
 class GuestLoginForm(forms.Form):
