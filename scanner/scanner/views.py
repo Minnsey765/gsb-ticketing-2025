@@ -96,7 +96,7 @@ def set_name(request):
     if request.method == 'POST':
         form = NameForm(request.POST)
         form_valid = form.is_valid()
-        pass_valid = form.cleaned_data["passphrase"] == os.environ['PASSPHRASE']
+        pass_valid = form.cleaned_data["passphrase"] == "Testing1234"
         if form_valid and pass_valid:
             request.session['checker_name'] = form.cleaned_data["name"]
             return redirect('scanner')

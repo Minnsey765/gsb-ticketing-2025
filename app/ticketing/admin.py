@@ -280,9 +280,9 @@ class TicketAdmin(admin.ModelAdmin):
 
         buffer = io.StringIO()
         writer = csv.writer(buffer)
-        writer.writerow(["name", "uuid", "kind", "dateapplied", "ubus?", "ubus for departure?", "ubus destination", "crsid/username"])
+        writer.writerow(["name", "uuid", "kind", "dateapplied", "ubus?", "ubus for departure?", "ubus destination", "email, alcohol?, vegetarian?"])
         for ticket in queryset:
-            writer.writerow([ticket.name, ticket.uuid, ticket.kind, ticket.date_applied, ticket.is_ubus, ticket.is_departure_bus, ticket.bus_destination, ticket.purchaser.username])
+            writer.writerow([ticket.name, ticket.uuid, ticket.kind, ticket.date_applied, ticket.is_ubus, ticket.is_departure_bus, ticket.bus_destination, ticket.email, ticket.is_alc, ticket.is_veg])
         buffer.seek(0)
         return HttpResponse(buffer, content_type='text/csv')
 

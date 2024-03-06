@@ -10,4 +10,6 @@ workerdocs/
 scripts/plan_b/pdfs/
 scripts/ticket_generation/pdfs/
 scripts/ticket_generation/svgs/
+scanner/staticfiles/*
+scanner/gsbdump.sql
 

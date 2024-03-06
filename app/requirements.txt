@@ -4,7 +4,7 @@ git+https://github.com/matiasilva/django-ucamwebauth@master
 google-auth
 google-cloud-storage
 gunicorn
-psycopg2
+psycopg2-binary
 requests
 simpleanalytics
 whitenoise

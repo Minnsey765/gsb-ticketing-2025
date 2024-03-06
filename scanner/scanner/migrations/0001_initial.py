@@ -144,28 +144,4 @@ class Migration(migrations.Migration):
                 'managed': False,
             },
         ),
-        migrations.CreateModel(
-            name='Attendance',
-            fields=[
-                (
-                    'id',
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name='ID',
-                    ),
-                ),
-                ('date', models.DateTimeField(auto_now_add=True)),
-                ('checker', models.CharField(max_length=30)),
-                (
-                    'ticket',
-                    models.OneToOneField(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        related_name='attendance',
-                        to='scanner.ticket',
-                    ),
-                ),
-            ],
-        ),
     ]

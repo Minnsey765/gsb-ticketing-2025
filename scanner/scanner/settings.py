@@ -5,10 +5,10 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = 'baguette'
 
-SECRET_KEY = os.environ["SECRET_KEY"]
 
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['*']
@@ -52,11 +52,19 @@ WSGI_APPLICATION = "scanner.wsgi.application"
 
 MAX_CONN_AGE = 600
 
-DATABASES = dict()
 
-DATABASES["default"] = dj_database_url.config(
-    conn_max_age=MAX_CONN_AGE, ssl_require=True
-)
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'gsbpostgres',
+        'PASSWORD': 'Secrecy-Freeze-Northern-Jump-9',
+        'HOST': 'gsb-ticketing-postgresql.cjv51lnk0aec.eu-west-2.rds.amazonaws.com',
+        'PORT': '5432',
+    }
+
+}
 
 # expire user sessions after 2 hours
 SESSION_COOKIE_AGE = 60 * 60 * 2
