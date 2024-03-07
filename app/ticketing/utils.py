@@ -2,7 +2,11 @@ import random
 import re
 from functools import wraps
 from urllib.parse import urlparse
-
+import qrcode
+from PIL import Image
+from PIL import ImageFont
+from PIL import ImageDraw
+from io import BytesIO
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import redirect, resolve_url
@@ -69,3 +73,50 @@ def match_identity(user, resp):
 
 def validate_ticket_ref(ref):
     return re.match(r"^GSB[A-Z1-9]{8}$", ref)
+
+
+ticket_name_map = {
+    "QJ" : "queue_jump_base.png",
+    "QJ_ALUM" : "queue_jump_base.png",
+    "QJ_EXT" : "queue_jump_base.png",
+    "QJ_BURSARY" : "queue_jump_base.png",
+    "QJ_OLD_COMM" : "queue_jump_base.png",
+    "S" : "standard_base.png",
+    "S_ALUM" : "standard_base.png",
+    "S_EXT" : "standard_base.png",
+    "S_BURSARY" : "standard_base.png",
+    "S_OLD_COMM" : "standard_base.png",
+}
+
+
+def add_name_ref(name, ref, img):
+    name_drawer = ImageDraw.Draw(img)
+    font = ImageFont.truetype("templates/tickets/OpenSans-Regular.ttf", 64)
+    name_drawer.text((300, 1500), name, (0,0,0), font=font)
+    name_drawer.text((300, 1600), ref, (0,0,0), font=font)
+
+def add_qr(ref, img):
+    qr = qrcode.QRCode(
+        version=3,
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        box_size=10,
+        border=4,
+    )
+    qrcode_img = qr.make_image(fill_color="black", back_color="white")
+    qrcode_img = qrcode_img.resize([int(2.0 * s) for s in qrcode_img.size])
+    img.paste(qrcode_img, (4460, 190))
+
+def export_pdf(img):
+    pdf_buffer = BytesIO()
+    img.save(pdf_buffer, 'PDF')
+    pdf_buffer.seek(0)
+    return pdf_buffer
+
+def ticket_gen_job(name, ref, type):
+    ticket_base = Image.open("templates/tickets/" + ticket_name_map[type])
+
+    add_name_ref(name, ref, ticket_base)
+    add_qr(ref, ticket_base)
+    
+    return ticket_base
+

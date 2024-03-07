@@ -3,7 +3,9 @@ import json
 import os
 from datetime import timedelta
 
+from .utils import ticket_gen_job, export_pdf
 import requests
+from io import BytesIO
 from django.contrib import messages
 from django.contrib.auth import BACKEND_SESSION_KEY, authenticate, login, logout
 from django.core.mail import mail_admins, send_mail
@@ -661,24 +663,13 @@ def download_ticket(request, ref=None):
         return redirect('manage')
 
     if request.method == 'GET':
-        # Google uses JSON files and heroku works with env vars, So base64
-        # encoded json env vars is my best compromise to work with both systems
-        cred_dict = json.loads(base64.b64decode(os.environ["GOOGLE_BASE_64_CREDS"]))
-        creds = Credentials.from_service_account_info(cred_dict)
-        client = storage.Client(credentials=creds)
+        ticket_img = ticket_gen_job(ticket.name, ticket.uuid, ticket.kind.enum)
+        pdf_buffer = export_pdf(ticket_img)
 
-        # Get the bucket and file objects
-        bucket = client.bucket(os.environ["GOOGLE_BUCKET_NAME"])
-        blob = bucket.blob(ref + ".pdf")
-
-        # Generate a signed URL with the Content-Disposition header set
-        url = blob.generate_signed_url(
-            response_disposition="attachment;",
-            version="v4",
-            expiration=timedelta(hours=10),
-            method="GET",
-        )
-        return redirect(url)
+        response = HttpResponse(pdf_buffer.read(), content_type="application/pdf")
+        response['Content-Disposition'] = 'attachment; filename=ticket.pdf'
+        return response
+        
 
 
 def patience(request):
