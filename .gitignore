@@ -12,4 +12,4 @@ scripts/ticket_generation/pdfs/
 scripts/ticket_generation/svgs/
 scanner/staticfiles/*
 scanner/gsbdump.sql
-
+.venv3.11

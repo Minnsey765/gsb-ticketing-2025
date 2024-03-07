@@ -102,6 +102,8 @@ def add_qr(ref, img):
         box_size=10,
         border=4,
     )
+    qr.add_data(ref)
+    qr.make(fit=True)
     qrcode_img = qr.make_image(fill_color="black", back_color="white")
     qrcode_img = qrcode_img.resize([int(2.0 * s) for s in qrcode_img.size])
     img.paste(qrcode_img, (4460, 190))
