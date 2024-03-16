@@ -208,7 +208,7 @@ def signup(request):
                 if(len(row) > 1):
                     if row[0] == user.username:
                         kind_csv_id = row[1]
-                    print(row[0] + " " + row[1])
+                    #print(row[0] + " " + row[1])
 
         allowed_user = AllowedUser.objects.filter(username=user.username)
         if allowed_user.exists():
@@ -637,30 +637,39 @@ def download_ticket(request, ref=None):
 
     # ensure ticket belongs to this user
     has_bought_ticket = ticket in request.user.tickets.all()
-    if not has_bought_ticket:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            'You tried to mess with our platform, violating the terms and conditions in the process. Your account has been reported and appropriate action will be taken.',
-        )
-        msg = render_to_string(
-            "emails/violation.txt",
-            {
-                "user": request.user,
-                "violation": "tried to download ticket which wasn't theirs",
-            },
-        )
-        mail_admins('User TC violation', msg, fail_silently=False)
-        return redirect('manage')
+    if not request.user.is_superuser:
+        if not has_bought_ticket:
+            messages.add_message(
+                request,
+                messages.WARNING,
+                "This ticket reference doesn't match your account, either this is a guest ticket or you are attempting to download a ticket which is not yours.",
+            )
+            msg = render_to_string(
+                "emails/violation.txt",
+                {
+                    "user": request.user,
+                    "violation": "tried to download ticket which wasn't theirs",
+                },
+            )
+            mail_admins('User TC violation', msg, fail_silently=False)
+            return redirect('manage')
 
-    # check name change is already in progress
-    if ticket.has_active_name_changes():
-        messages.add_message(
-            request,
-            messages.WARNING,
-            'A name change for this ticket is in progress. Please follow the payment instructions sent by email.',
-        )
-        return redirect('manage')
+        # check name change is already in progress
+        if ticket.has_active_name_changes():
+            messages.add_message(
+                request,
+                messages.WARNING,
+                'A name change for this ticket is in progress. Please follow the payment instructions sent by email.',
+            )
+            return redirect('manage')
+
+        if not ticket.has_paid:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                'You have not paid for this ticket, please contact us at it@girtonspringball.com',
+            )
+            return redirect('manage')
 
     if request.method == 'GET':
         ticket_img = ticket_gen_job(ticket.name, ticket.uuid, ticket.kind.enum)

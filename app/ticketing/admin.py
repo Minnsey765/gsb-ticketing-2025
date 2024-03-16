@@ -182,6 +182,7 @@ class TicketAdmin(admin.ModelAdmin):
         'download_ticketing_details',
         'send_payment_confirm',
         'send_download_link',
+        'send_ticket_email',
         "mark_paid",
     ]
     list_per_page = 1200
@@ -286,7 +287,32 @@ class TicketAdmin(admin.ModelAdmin):
         buffer.seek(0)
         return HttpResponse(buffer, content_type='text/csv')
 
-    @admin.action(description='Send link to download tickets')
+    @admin.action(description='Send final ticket email')
+    def send_ticket_email(self, request, queryset):
+        for ticket in queryset:
+            url = "ticketing.girtonspringball.com/download/" + str(ticket.uuid)
+
+            msg = render_to_string(
+                "emails/ticket_send.txt", {"url": url, "ticket": ticket}
+            )
+
+            recipients = [ticket.purchaser.email]
+
+            send_mail(
+                'GSB24 Ticketing: Download your ticket',
+                strip_tags(msg),
+                'it@girtonspringball.com',
+                recipients,
+                html_message=msg,
+            )
+
+        self.message_user(
+            request,
+            f'{queryset.count()} emails were successfully sent.',
+            messages.SUCCESS,
+        )
+
+    @admin.action(description='Send backup link to download tickets')
     def send_download_link(self, request, queryset):
         # Google uses JSON files and heroku works with env vars, So base64
         # encoded json env vars is my best compromise to work with both systems

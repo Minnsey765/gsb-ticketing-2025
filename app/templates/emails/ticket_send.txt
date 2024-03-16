@@ -1,0 +1,12 @@
+Hi {{ticket.name}},
+
+Tickets for GSB 2024 are now available! Please find your ticket {% autoescape off %} <a href="{{url}}">here</a>. {% endautoescape %}
+
+Links are tied to the original purchaser's account for security, so if you have any guests or have done a name change, please make sure to pass the tickets onto them.
+
+For any queries or issues, please email it@girtonspringball.com or reply to this email.
+
+Warm wishes,
+
+Yuvraj & Peter
+GSB24 IT & Ticketing
