@@ -63,7 +63,7 @@
         {% simpleanalytics_sync %}
     </head>
     <body style="min-height: 100vh">
-        {% simpleanalytics_noscript_block %}
+        {% simpleanalytics_sync %}
         <div
             style="
                 background: url('{% static 'images/grass.png' %}') no-repeat;
@@ -130,7 +130,7 @@
                                     ><i class="bi bi-people"></i> Committee
                                     </a>
                                 </li>
-                                    <!--<li class="nav-item">
+                                <!--<li class="nav-item">
                           <a href="/" class="nav-link" style="color: white"
                             ><i class="bi bi-ticket-detailed"></i> Tickets
                           </a>
@@ -140,70 +140,70 @@
                                     <i class="bi bi-screwdriver me-2"></i> Working
                                     </a>
                                 </li> -->
-                                    {% if user.is_authenticated %}
-                                        <li class="nav-item">
-                                            <a href="{% url 'manage' %}" class="nav-link text-light"><i class="bi bi-wallet me-2"></i>My tickets</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="{% url 'logout' %}" class="nav-link text-light"><i class="bi bi-box-arrow-left me-2"></i>Log out</a>
-                                        </li>
-                                    {% endif %}
-                                </ul>
-                            </div>
-                            <div class="col">
-                                <ul class="float-end nav nav-pills" style="margin-top: auto; margin-bottom: auto">
+                                {% if user.is_authenticated %}
                                     <li class="nav-item">
-                                        <a href="https://www.facebook.com/girtonspringball2024" class="nav-link" style="color: white; font-size: 30px;"
-                                        ><i class="bi bi-facebook"></i>
-                                        </a>
+                                        <a href="{% url 'manage' %}" class="nav-link text-light"><i class="bi bi-wallet me-2"></i>My tickets</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="https://www.instagram.com/girtonspringball2024/" class="nav-link" style="color: white; font-size: 30px;"
-                                        ><i class="bi bi-instagram"></i>
-                                        </a>
+                                        <a href="{% url 'logout' %}" class="nav-link text-light"><i class="bi bi-box-arrow-left me-2"></i>Log out</a>
                                     </li>
-                                </ul>
-                            </div>
+                                {% endif %}
+                            </ul>
                         </div>
-                    </header>
-                </div>
+                        <div class="col">
+                            <ul class="float-end nav nav-pills" style="margin-top: auto; margin-bottom: auto">
+                                <li class="nav-item">
+                                    <a href="https://www.facebook.com/girtonspringball2024" class="nav-link" style="color: white; font-size: 30px;"
+                                    ><i class="bi bi-facebook"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://www.instagram.com/girtonspringball2024/" class="nav-link" style="color: white; font-size: 30px;"
+                                    ><i class="bi bi-instagram"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
             </div>
+        </div>
 
-            {% if messages %}
-                {% for message in messages %}
-                    {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-                        {% include "partials/message.html" with msg=message class='alert-warning' icon_class='bi-exclamation-triangle-fill' only %}
-                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-                        {% include "partials/message.html" with msg=message class='alert-success' icon_class='bi-check-circle-fill' only %}
-                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                        {% include "partials/message.html" with msg=message class='alert-danger' icon_class='bi-x-circle-fill' only %}
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-            <main class="container mb-3 p-3 pb-0" style="min-height: 62vh; display: flex; flex-direction: column">{% block main %}{% endblock %}
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                    {% include "partials/message.html" with msg=message class='alert-warning' icon_class='bi-exclamation-triangle-fill' only %}
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    {% include "partials/message.html" with msg=message class='alert-success' icon_class='bi-check-circle-fill' only %}
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    {% include "partials/message.html" with msg=message class='alert-danger' icon_class='bi-x-circle-fill' only %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <main class="container mb-3 p-3 pb-0" style="min-height: 62vh; display: flex; flex-direction: column">{% block main %}{% endblock %}
             <div style="flex-grow:1"></div>
 
-            </main>
-            <footer
-                style="
-                    background: url('{% static 'images/grass.png' %}') no-repeat;
-                    background-position: center;
-                    background-size: cover;
-                    margin-top: 3rem;
-                "
-                class="text-center p-3"
-            >
-                <p class="mb-0 text-light">
-                    GSB ticketing brought to you by Peter Jackson and Yuvraj Dubey
-                </p>
-                <p class="mb-0 text-light">
-                    Art by Elliot Hamilton-Croft and Maddy Guha
-                </p>
-            </footer>
-            <!-- lazy load JS -->
-            {% block scripts %} {% endblock %}
-            <!-- Cloudflare Web Analytics -->
-            <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
-                data-cf-beacon='{"token": "9792736c2a1c4c8bbfb85a11bd77473f"}'></script><!-- End Cloudflare Web Analytics -->
-        </body>
-    </html>
+        </main>
+        <footer
+            style="
+                background: url('{% static 'images/grass.png' %}') no-repeat;
+                background-position: center;
+                background-size: cover;
+                margin-top: 3rem;
+            "
+            class="text-center p-3"
+        >
+            <p class="mb-0 text-light">
+                GSB ticketing brought to you by Peter Jackson and Yuvraj Dubey
+            </p>
+            <p class="mb-0 text-light">
+                Art by Elliot Hamilton-Croft and Maddy Guha
+            </p>
+        </footer>
+        <!-- lazy load JS -->
+        {% block scripts %} {% endblock %}
+        <!-- Cloudflare Web Analytics -->
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+            data-cf-beacon='{"token": "9792736c2a1c4c8bbfb85a11bd77473f"}'></script><!-- End Cloudflare Web Analytics -->
+    </body>
+</html>
