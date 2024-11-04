@@ -18,9 +18,18 @@ Django-powered web application for the 2023 Girton Spring Ball Ticketing platfor
 
 ### Starting out
 
-1. Any `manage.py` command should automatically create the SQLite database.
-2. Import seed data: `python manage.py loaddata ticketing/fixtures/*`
-3. Migrate the database: `python manage.py migrate`
+To start with a clean database populated with lookup information
+
+1. delete the existing database `rm gsb_db.db` (`del gsb_db.db`)
+2. create the empty database `python3 ./manage.py migrate`
+3. populate the lookup tables `./import_fixtures.sh` (`./import_fixtures.ps1`)
+4. Optionally create super user `python3 ./manage.py createsuperuser`
+
+   - (Seems to be an issue with setting the password)
+
+5. Any `manage.py` command should automatically create the SQLite database.
+6. Import seed data: `python manage.py loaddata ticketing/fixtures/*`
+7. Migrate the database: `python manage.py migrate`
 
 ### Main dependencies
 

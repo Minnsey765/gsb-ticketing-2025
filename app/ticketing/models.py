@@ -164,8 +164,11 @@ class UserManager(BaseUserManager):
         matriculation_date=None,
         first_name=None,
         last_name=None,
-        kind=UserKind.objects.get(enum='GIRTON_ALUM'),
+        kind=None,
     ):
+        if kind == None:
+            kind = UserKind.objects.get(enum='GIRTON_ALUM')
+
         user = self.model(
             username=email,
             email=email,
@@ -177,8 +180,30 @@ class UserManager(BaseUserManager):
             has_signed_up=True,
             kind=kind,
         )
+        print('creating user')
+        print(password)
         user.set_password(password)
+        print(user.password)
         user.save()
+        return user
+
+    def create_superuser(self, email, username, password):
+        print('creating superuser')
+        print(password)
+        user = self.create_user(
+            email=self.normalize_email(email),
+            password=password,
+            first_name=username,
+            last_name='admin',
+            pname='',
+            psurname='',
+            kind=UserKind.objects.get(enum='COMMITTEE'),
+        )
+
+        user.is_active = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
         return user
 
 
@@ -356,7 +381,6 @@ class WorkerApplication(models.Model):
 
     qualities = models.CharField(max_length=2000, default='')
     friends = models.CharField(max_length=450, default='')
-
 
     # application role
     choice1 = models.ForeignKey(

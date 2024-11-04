@@ -19,3 +19,17 @@ TODO
   -- from cambridge?
   --- which college?
   a
+
+Setup
+
+- ( del gsb_db.db)
+- create the empty database
+  -- python3 ./manage.py migrate
+- populate the lookup tables
+  -- ./import_fixtures.ps1
+- create super user
+  -- python3 ./manage.py createsuperuser
+  --- Seems to be an issue with setting the password
+
+Delete /admin/login.html
+-- access to /admin console and actions
