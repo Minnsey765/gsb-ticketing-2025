@@ -8,11 +8,11 @@ Django-powered web application for the 2023 Girton Spring Ball Ticketing platfor
 
 0. Change to app dir: `cd app`
 1. Create a virtual environment: `python3 -m venv .venv`
-2. Activate the environment: `. .venv/bin/activate` (`.venv/scripts/activate.ps1`)
+2. Activate the environment: `. .venv/bin/activate` ( For Powershell `.venv/scripts/activate.ps1`)
 3. Install dependencies: `pip install -r requirements.txt`
 4. Install development dependencies: `pip install -r dev_requirements.txt`
 5. Set up pre-commit: `pre-commit install`
-6. Source required variables: `. dev.sh` (`./dev.ps1`)
+6. Source required variables: `. dev.sh` ( For Powershell `./dev.ps1`)
 7. Install fixtures (make sure to load user_kind last as it has foreign key dependencies on all the other fixtures) `./import_fixtures.sh` (`./import_fixtures.ps1`)
 8. Run local development server: `python3 manage.py runserver`
 
@@ -20,7 +20,7 @@ Django-powered web application for the 2023 Girton Spring Ball Ticketing platfor
 
 To start with a clean database populated with lookup information
 
-1. delete the existing database `rm gsb_db.db` (`del gsb_db.db`)
+1. delete the existing database `rm gsb_db.db` ( For Powershell `del gsb_db.db`)
 2. create the empty database `python3 ./manage.py migrate`
 3. populate the lookup tables `./import_fixtures.sh` (`./import_fixtures.ps1`)
 4. Optionally create super user `python3 ./manage.py createsuperuser`
