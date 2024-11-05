@@ -6,14 +6,14 @@ Django-powered web application for the 2023 Girton Spring Ball Ticketing platfor
 
 ### App
 
-0. `cd ./app`
+0. Change to app dir: `cd app`
 1. Create a virtual environment: `python3 -m venv .venv`
-2. Activate the environment: `. .venv/bin/activate`
+2. Activate the environment: `. .venv/bin/activate` (`.venv/scripts/activate.ps1`)
 3. Install dependencies: `pip install -r requirements.txt`
 4. Install development dependencies: `pip install -r dev_requirements.txt`
 5. Set up pre-commit: `pre-commit install`
-6. Source required variables: `. app/dev.sh`
-7. Install fixtures (make sure to load user_kind last as it has foreign key dependencies on all the other fixtures) `./import_fixtures.sh`
+6. Source required variables: `. dev.sh` (`./dev.ps1`)
+7. Install fixtures (make sure to load user_kind last as it has foreign key dependencies on all the other fixtures) `./import_fixtures.sh` (`./import_fixtures.ps1`)
 8. Run local development server: `python3 manage.py runserver`
 
 ### Starting out
