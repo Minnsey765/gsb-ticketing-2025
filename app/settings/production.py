@@ -2,8 +2,8 @@ import os
 
 from .common import *
 
-ALLOWED_HOSTS = ['*']
-DEBUG = False
+ALLOWED_HOSTS = ['localhost','ec2-3-83-223-198.compute-1.amazonaws.com', '3.83.223.198']
+DEBUG = True
 SECRET_KEY = 'croissant'
 
 #if 'SECRET_KEY' in os.environ:
@@ -14,13 +14,12 @@ SECRET_KEY = 'croissant'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': 'gsb-ticketing-postgresql.cjv51lnk0aec.eu-west-2.rds.amazonaws.com',
-        'PORT': '5432',
+        'NAME': 'gsb',
+        'USER': 'gsb_user',
+        'PASSWORD': 'man in a box',
+        'HOST': 'localhost',
+        'PORT': '',
     }
-
 }
 
 MAX_CONN_AGE = 600

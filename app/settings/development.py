@@ -1,5 +1,6 @@
 from .common import *
 
+ALLOWED_HOSTS = ['localhost','ec2-3-83-223-198.compute-1.amazonaws.com']
 DEBUG = True
 SECRET_KEY = 'croissant'
 
@@ -40,3 +41,4 @@ EMAIL_HOST_USER = ""
 ADMINS = [
     ('Bob', 'bob@thebuilder.com'),
 ]
+
