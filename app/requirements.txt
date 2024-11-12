@@ -6,7 +6,8 @@ git+https://github.com/matiasilva/django-ucamwebauth@master
 google-auth
 google-cloud-storage
 gunicorn
-Pillowqrcode
+Pillow
+qrcode
 #psycopg2-binary
 requests
 simpleanalytics

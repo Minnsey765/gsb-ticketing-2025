@@ -1,6 +1,6 @@
 from .common import *
 
-ALLOWED_HOSTS = ['localhost','ec2-3-83-223-198.compute-1.amazonaws.com']
+ALLOWED_HOSTS = ['localhost', 'ec2-3-83-223-198.compute-1.amazonaws.com', '127.0.0.1']
 DEBUG = True
 SECRET_KEY = 'croissant'
 
@@ -30,15 +30,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_PASSWORD = ""
 EMAIL_HOST_USER = ""
 
-#EMAIL_HOST = 'smtp.zoho.eu'
-#EMAIL_PORT = 587
-#EMAIL_USE_TLS = True
-#SERVER_EMAIL = f'it@girtonspringball.com'
+# EMAIL_HOST = 'smtp.zoho.eu'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# SERVER_EMAIL = f'it@girtonspringball.com'
 
-#EMAIL_HOST_PASSWORD = ""
-#EMAIL_HOST_USER = "it@girtonspringball.com"
+# EMAIL_HOST_PASSWORD = ""
+# EMAIL_HOST_USER = "it@girtonspringball.com"
 
 ADMINS = [
     ('Bob', 'bob@thebuilder.com'),
 ]
-
