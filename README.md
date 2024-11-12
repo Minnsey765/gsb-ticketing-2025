@@ -94,3 +94,8 @@ MIT
 ## Credits
 
 Matias Silva 2022
+
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu
+https://www.freecodecamp.org/news/how-to-deploy-django-project-on-ec2/
+
