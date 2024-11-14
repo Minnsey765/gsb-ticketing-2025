@@ -37,11 +37,12 @@ ADMINS = [
 ]
 
 
-# AWS SES CONFIGURATION
+# AWS SES CONFIGURATION (i added "AWS_USER_ACCOUNT_ID = '864899874397'" but idk if it's meant to go here or if it's needed at all)
 """
 EMAIL_BACKEND = 'django_ses.SESBackend'
 AWS_SES_REGION_NAME = 'eu-west-2'
 AWS_SES_REGION_ENDPOINT = 'email-smtp.eu-west-2.amazonaws.com'
+AWS_USER_ACCOUNT_ID = '864899874397'
 USE_SES_V2 = True
 
 AWS_ACCESS_KEY_ID = ''
