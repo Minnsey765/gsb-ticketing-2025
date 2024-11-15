@@ -66,7 +66,11 @@ class CdkStack(Stack):
             scope=self,
             id="TicketingLambda",
             environment= {
-                'POSTGRES_USER' : secret.secret_value_from_json("username").to_string(),
+                'POSTGRES_USER' : gsb_db.credentials.username,
+                'POSTGRES_PASSWORD' : gsb_db.credentials.password,
+                'POSTGRES_DB' : gsb_db.databaseName,
+                'PORT' : gsb_db.dbInstanceEndpointPort,
+                'HOST' : gsb_db.dbInstanceEndpointAddress,
             }
             function_name="GSB_TicketingLambda",
             code=_lambda.DockerImageCode.from_image_asset(

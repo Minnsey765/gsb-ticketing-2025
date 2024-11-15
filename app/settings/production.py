@@ -19,11 +19,11 @@ SECRET_KEY = 'croissant'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gsb-data',
+        'NAME': os.environ['POSTGRES_DB'],
         'USER': os.environ["POSTGRES_USER"],
-        'PASSWORD': 'man_in_a_box',
-        'HOST': 'postgres',
-        'PORT': '5432',
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],  #'man_in_a_box',
+        'HOST': os.environ['HOST'],  #'postgres',
+        'PORT': os.environ['PORT'],  #'5432',
     }
 }
 
