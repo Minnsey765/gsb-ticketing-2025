@@ -7,8 +7,8 @@ google-auth
 google-cloud-storage
 gunicorn
 Pillow
+psycopg2-binary
 qrcode
-#psycopg2-binary
 requests
 simpleanalytics
 whitenoise
