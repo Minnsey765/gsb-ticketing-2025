@@ -2,6 +2,7 @@ from aws_cdk import Stack
 from aws_cdk import aws_ec2 as ec2  # Duration,
 from aws_cdk import aws_lambda as _lambda
 from aws_cdk import aws_rds as rds
+from aws_cdk import aws_secretsmanager as secretsmanager
 from constructs import Construct
 
 
@@ -59,15 +60,16 @@ class CdkStack(Stack):
                                         publicly_accessible= True
                                     )
 
-        gsb_db.secret.secret_arn
+        secret_arn = gsb_db.secret.secret_arn
+        secret = secretsmanager.Secret.from_secret_arn(self, "DatabaseSecret", secret_arn)
 
 
         gsb_lambda = _lambda.DockerImageFunction(
             scope=self,
             id="TicketingLambda",
-            environment= {
-                'POSTGRES_USER' : gsb_db.credentials.username,
-                'POSTGRES_PASSWORD' : gsb_db.credentials.password,
+            environment = {
+                'POSTGRES_USER' : secret.secret_value_from_json("username").to_string(), #gsb_db.credentials.username,
+                'POSTGRES_PASSWORD' : secret.secret_value_from_json("password").to_string(), #gsb_db.credentials.password,
                 'POSTGRES_DB' : gsb_db.databaseName,
                 'PORT' : gsb_db.dbInstanceEndpointPort,
                 'HOST' : gsb_db.dbInstanceEndpointAddress,
