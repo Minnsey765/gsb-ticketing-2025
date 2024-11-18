@@ -1,11 +1,37 @@
+from django.contrib.auth import views as auth_views
 from django.contrib.flatpages import views as flatpage_views
 from django.urls import include, path
 
 from . import views
+from .views import CustomPasswordDoneView, CustomPasswordResetView
 
 urlpatterns = [
     path('', include('ucamwebauth.urls')),
     path('accounts/login/guest/', views.login_guest, name='login_guest'),
+    path(
+        'password-reset/',
+        CustomPasswordResetView.as_view(
+            template_name='registration/password_reset_form.html'
+        ),
+        name='password_reset',
+    ),
+    path(
+        'password-reset/done/',
+        auth_views.PasswordResetDoneView.as_view(),
+        name='password_reset_done',
+    ),
+    path(
+        'reset/<uidb64>/<token>/',
+        CustomPasswordDoneView.as_view(
+            template_name='registration/password_reset_confirm.html'
+        ),
+        name='password_reset_confirm',
+    ),
+    path(
+        'reset/done/',
+        auth_views.PasswordResetCompleteView.as_view(),
+        name='password_reset_complete',
+    ),
     path('accounts/logout/guest/', views.logout_guest, name='logout'),
     path('buy/ticket/', views.buy_ticket, name='buy_ticket'),
     path('buy/change/<str:ref>', views.buy_change, name='buy_change'),
@@ -21,5 +47,9 @@ urlpatterns = [
     path('terms/', flatpage_views.flatpage, {'url': '/terms/'}, name='terms'),
     path('', views.index, name='index'),
     path('workerapp/', views.worker_application, name='worker_application'),
-    path('workerdocs/<str:application>/<str:document>/', views.worker_docs, name='worker_docs')
+    path(
+        'workerdocs/<str:application>/<str:document>/',
+        views.worker_docs,
+        name='worker_docs',
+    ),
 ]

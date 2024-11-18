@@ -1,6 +1,6 @@
 Hi {{ticket.purchaser.get_full_name}},
 
-You've requested a name change for your {{ticket.kind.name}} (Guest) ticket to the 2024 Girton Spring Ball. This is a request for payment.
+You've requested a name change for your {{ticket.kind.name}} (Guest) ticket to the 2025 Girton Spring Ball. This is a request for payment.
 
 ## Previous attendee information ##
 
@@ -36,5 +36,5 @@ Please quote both in all future correspondence with us regarding this matter. Fo
 
 With warm wishes,
 
-Yuvraj & Peter
-GSB24 IT & Ticketing
+Ishaan & Oliver
+GSB25 IT & Ticketing
