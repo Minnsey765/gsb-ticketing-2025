@@ -1,6 +1,6 @@
 Hi {{ticket.name}},
 
-Tickets for GSB 2024 are now available! Please find your ticket {% autoescape off %} <a href="{{url}}">here</a>. {% endautoescape %}
+Tickets for GSB 2025 are now available! Please find your ticket {% autoescape off %} <a href="{{url}}">here</a>. {% endautoescape %}
 
 Links are tied to the original purchaser's account for security, so if you have any guests or have done a name change, please make sure to pass the tickets onto them.
 
