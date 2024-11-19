@@ -137,11 +137,21 @@ class CdkStack(Stack):
             proxy=True
         )
 
+        gsb_api.node.default_child.add_property_override(
+            "BinaryMediaTypes",
+            ["*/*"]
+        )
+
         # Create an API Gateway endpoint for the Lambda
         scanner_api = apigateway.LambdaRestApi(
             self, "ScannerGateway",
             handler=scanner_lambda,
             proxy=True
+        )
+
+        scanner_api.node.default_child.add_property_override(
+            "BinaryMediaTypes",
+            ["*/*"]
         )
 
         ticketing_hosted_zone = route53.HostedZone(

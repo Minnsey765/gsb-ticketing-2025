@@ -1,4 +1,5 @@
 import os
+import json
 import boto3
 from pathlib import Path
 
@@ -76,7 +77,7 @@ if (arn := os.environ.get("AWS_SECRET_ARN")):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': creds['dbname'],
+            'NAME': 'postgres',
             'USER': creds['username'],
             'PASSWORD': creds['password'],  #'man_in_a_box',
             'HOST': creds['host'],  #'postgres',

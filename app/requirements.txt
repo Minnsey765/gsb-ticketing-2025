@@ -11,5 +11,5 @@ psycopg2-binary
 qrcode
 requests
 simpleanalytics
-whitenoise
+whitenoise[brotli]
 boto3

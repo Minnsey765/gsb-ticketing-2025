@@ -55,8 +55,6 @@ SECRET_KEY = 'croissant'
 MAX_CONN_AGE = 600
 # STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
-
 
 ADMINS = [
     ('Yuvraj', 'yuvraj@yuvrajdubey.co.uk'),
@@ -90,6 +88,13 @@ EMAIL_HOST_USER = ""
 # expire user sessions after 1 hour
 SESSION_COOKIE_AGE = 60 * 60
 
-STATIC_ROOT = 'static/'
+STATIC_URL = '/static/'
 
-STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
