@@ -1,4 +1,5 @@
 import os
+import boto3
 from pathlib import Path
 
 import dj_database_url
@@ -57,14 +58,31 @@ MAX_CONN_AGE = 600
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'gsbpostgres',
-        'PASSWORD': 'Secrecy-Freeze-Northern-Jump-9',
-        'HOST': 'gsb-ticketing-postgresql.cjv51lnk0aec.eu-west-2.rds.amazonaws.com',
-        'PORT': '5432',
+        'NAME': 'gsb-data',
+        'USER': 'gsb-ticketing',
+        'PASSWORD': 'man_in_a_box',  #'man_in_a_box',
+        'HOST': 'postgres',  #'postgres',
+        'PORT': '5432',  #'5432',
     }
-
 }
+
+if (arn := os.environ.get("AWS_SECRET_ARN")):
+    client = boto3.client('secretsmanager')
+
+    secret = client.get_secret_value(SecretId=arn).get('SecretString')
+
+    creds = json.loads(secret)
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': creds['dbname'],
+            'USER': creds['username'],
+            'PASSWORD': creds['password'],  #'man_in_a_box',
+            'HOST': creds['host'],  #'postgres',
+            'PORT': creds['port'],  #'5432',
+        }
+    }
 
 # expire user sessions after 2 hours
 SESSION_COOKIE_AGE = 60 * 60 * 2

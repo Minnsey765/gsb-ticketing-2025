@@ -8,7 +8,6 @@ COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.8.4 /lambda-adapter /opt
 
 # Set the working directory
 WORKDIR /app
-RUN apk add git
 # Copy the requirements file and install dependencies
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt

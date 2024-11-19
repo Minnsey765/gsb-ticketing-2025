@@ -1,10 +1,44 @@
 import os
+import boto3
+import json
 
 from .common import *
 
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'gsb-data',
+        'USER': 'gsb-ticketing',
+        'PASSWORD': 'man_in_a_box',  #'man_in_a_box',
+        'HOST': 'postgres',  #'postgres',
+        'PORT': '5432',  #'5432',
+    }
+}
+
+if (arn := os.environ.get("AWS_SECRET_ARN")):
+    client = boto3.client('secretsmanager')
+
+    secret = client.get_secret_value(SecretId=arn).get('SecretString')
+
+    creds = json.loads(secret)
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'postgres',
+            'USER': creds['username'],
+            'PASSWORD': creds['password'],  #'man_in_a_box',
+            'HOST': creds['host'],  #'postgres',
+            'PORT': creds['port'],  #'5432',
+        }
+    }
+
+
 ALLOWED_HOSTS = [
     'localhost',
-    'ec2-13-51-72-40.eu-north-1.compute.amazonaws.com',
+    'eewmuefw2h.execute-api.eu-west-2.amazonaws.com',
+    'ticketing.girtonspringball.com',
     '13.51.72.40',
 ]
 DEBUG = True
@@ -16,16 +50,7 @@ SECRET_KEY = 'croissant'
 # db
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['POSTGRES_DB'],
-        'USER': os.environ["POSTGRES_USER"],
-        'PASSWORD': os.environ['POSTGRES_PASSWORD'],  #'man_in_a_box',
-        'HOST': os.environ['HOST'],  #'postgres',
-        'PORT': os.environ['PORT'],  #'5432',
-    }
-}
+
 
 MAX_CONN_AGE = 600
 # STATIC_ROOT = BASE_DIR / "staticfiles"

@@ -5,6 +5,7 @@ if [ $? -ne 0 ]
 then
   python3 manage.py migrate
 
+
   # check for a good exit
   if [ $? -ne 0 ]
   then
@@ -13,3 +14,6 @@ then
   fi
 
 fi
+
+gunicorn --workers=1 --bind=0.0.0.0:8080 scanner.wsgi:application
+

@@ -4,7 +4,17 @@ services:
       context: app
       dockerfile: Dockerfile
     ports:
-      - 8000:8000
+      - 8000:8080
+    volumes:
+      - ./app:/app
+  scanner:
+    build:
+      context: scanner
+      dockerfile: Dockerfile
+    ports:
+      - 9000:8080
+    volumes:
+      - ./scanner:/scanner
   postgres:
     image: postgres:16-alpine
     restart: always
