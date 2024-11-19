@@ -26,30 +26,30 @@
         <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href="{% static 'apple-touch-icon.png' %}"
+            href="{% static 'images/gsbs.svg' %}"
         />
         <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="{% static 'favicon-32x32.png' %}"
+            href="{% static 'images/gsbs.svg' %}"
         />
         <link
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="{% static 'favicon-16x16.png' %}"
+            href="{% static 'images/gsbs.svg' %}"
         />
         <link rel="manifest" href="{% static 'site.webmanifest' %}" />
 
         <!--important head stuff -->
-        <title>{{ title | default:"Home"}} | GSB24 Ticketing</title>
+        <title>{{ title | default:"Home"}} | GSB25 Ticketing</title>
 
         <!-- SEO tags -->
-        <meta property="og:title" content="GSB24 Ticketing" />
+        <meta property="og:title" content="GSB25 Ticketing" />
         <meta name="robots" content="noarchive" />
-        <meta name="description" content="GSB 2024 Ticketing System" />
-        <meta property="og:description" content="GSB 2024 Ticketing System" />
+        <meta name="description" content="GSB 2025 Ticketing System" />
+        <meta property="og:description" content="GSB 2025 Ticketing System" />
 
         <!-- internal CSS -->
         <style>
@@ -66,7 +66,7 @@
         {% simpleanalytics_sync %}
         <div
             style="
-                background: url('{% static 'images/grass.png' %}') no-repeat;
+                background: url('{% static 'images/circus-banner.jpg' %}') no-repeat;
                 background-position: center;
                 background-size: cover;
             "
@@ -110,7 +110,7 @@
                     <div class="row w-100 align-items-center">
                         <div class="col">
                             <a href="https://girtonspringball.com/" class="d-flex mb-3 p-1 mb-md-0 me-md-auto">
-                                <img src="{% static 'images/gsb.svg' %}" id="title" alt="Girton Spring Ball 2024!" style="max-width: 40vw; max-height: 18vh; padding: 3vh 3vw;">
+                                <img src="{% static 'images/gsbs.svg' %}" id="title" style="max-width: 40vw; max-height: 18vh; padding: 3vh 3vw;">
                             </a>
                         </div>
                         <div class="col-5">
@@ -186,7 +186,7 @@
         </main>
         <footer
             style="
-                background: url('{% static 'images/grass.png' %}') no-repeat;
+                background: url('{% static 'images/circus-banner.jpg' %}') no-repeat;
                 background-position: center;
                 background-size: cover;
                 margin-top: 3rem;
@@ -194,10 +194,10 @@
             class="text-center p-3"
         >
             <p class="mb-0 text-light">
-                GSB ticketing brought to you by Peter Jackson and Yuvraj Dubey
+                GSB ticketing brought to you by Oliver Minns and Ishaan Agarwal
             </p>
             <p class="mb-0 text-light">
-                Art by Elliot Hamilton-Croft and Maddy Guha
+                Art by Gracy MacLean and Zerlynde Goik
             </p>
         </footer>
         <!-- lazy load JS -->

@@ -52,14 +52,12 @@ class BuyTicketForm(forms.Form):
     def clean_verif(self):
         data = self.cleaned_data['verif']
         alum_code = PromoCode.objects.get(enum='ALUM_SIGNUP')
-        #bursary_code = PromoCode.objects.get(enum='BURSARY_ENABLE')
+        # bursary_code = PromoCode.objects.get(enum='BURSARY_ENABLE')
         kind = self.cleaned_data.get('kind')
         print(kind)
-        if (data != alum_code.value and ('ALUM' in kind.enum)):
-            raise ValidationError(
-                "Invalid Alumni verification code."
-            )
-        elif (data == alum_code.value and ('ALUM' not in kind.enum)):
+        if data != alum_code.value and ('ALUM' in kind.enum):
+            raise ValidationError("Invalid Alumni verification code.")
+        elif data == alum_code.value and ('ALUM' not in kind.enum):
             raise ValidationError(
                 "You are logged in with a Raven account, please sign out and use the Alumni login."
             )
@@ -76,12 +74,12 @@ class BuyTicketForm(forms.Form):
 
 
 class WorkerApplicationForm(forms.Form):
-     # Probably shouldn't hardcode this either
+    # Probably shouldn't hardcode this either
     def __init__(self, worker_roles_qs, *args, **kwargs):
         super(WorkerApplicationForm, self).__init__(*args, **kwargs)
         self.fields['choice1'].queryset = worker_roles_qs.all()
         self.fields['choice2'].queryset = worker_roles_qs.all()
-    
+
     colleges = [
         ("christs", "Christ's College"),
         ("churchill", "Churchill College"),
@@ -149,6 +147,7 @@ class GuestSignupForm(forms.Form):
         data = self.cleaned_data['promocode']
         # 500 if no code defined
         alum_code = PromoCode.objects.get(enum='ALUM_SIGNUP')
+        print(alum_code.value)
         if data != alum_code.value:
             raise ValidationError("Incorrect alumni verification code")
 

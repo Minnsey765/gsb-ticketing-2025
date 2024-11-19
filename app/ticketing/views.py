@@ -1,20 +1,20 @@
 import base64
+import csv
 import json
 import os
 from datetime import timedelta
-
-from .utils import ticket_gen_job, export_pdf
-import requests
 from io import BytesIO
+
+import requests
 from django.contrib import messages
 from django.contrib.auth import BACKEND_SESSION_KEY, authenticate, login, logout
+from django.contrib.auth import views as auth_views
 from django.core.mail import mail_admins, send_mail
-from django.http import FileResponse, Http404, HttpResponse
+from django.http import FileResponse, Http404, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from google.cloud import storage
 from google.oauth2.service_account import Credentials
-import csv
 
 from .forms import (
     BuyTicketForm,
@@ -35,7 +35,13 @@ from .models import (
     WorkerApplication,
     WorkerApplicationRole,
 )
-from .utils import login_required, match_identity, validate_ticket_ref
+from .utils import (
+    export_pdf,
+    login_required,
+    match_identity,
+    ticket_gen_job,
+    validate_ticket_ref,
+)
 
 
 def index(request):
@@ -205,10 +211,10 @@ def signup(request):
         with open('ticketing/lookup.csv') as csvFile:
             reader = csv.reader(csvFile)
             for row in reader:
-                if(len(row) > 1):
+                if len(row) > 1:
                     if row[0] == user.username:
                         kind_csv_id = row[1]
-                    #print(row[0] + " " + row[1])
+                    # print(row[0] + " " + row[1])
 
         allowed_user = AllowedUser.objects.filter(username=user.username)
         if allowed_user.exists():
@@ -236,7 +242,6 @@ def signup(request):
         # don't guess email if they're an alum
         """
         email = f'{user.username}@cam.ac.uk' if not user.profile.raven_for_life else ''
-
 
         form = SignupForm(
             initial={
@@ -319,8 +324,8 @@ def worker_application(request):
             msg = render_to_string(
                 "emails/worker_application.txt", {"application": application}
             )
-            #assemble email address (from crsid)
-            
+            # assemble email address (from crsid)
+
             recipients = [f'{application.crsid}@cam.ac.uk']
             # both admin and applicant should receive email
             """
@@ -352,7 +357,7 @@ def worker_application(request):
             )
             print(form.is_valid())
             print(form.errors)
-            
+
             return render(
                 request,
                 "worker_application.html",
@@ -463,8 +468,8 @@ def buy_ticket(request):
                 # both purchaser and attendee should receive email
                 if not ticket.is_own:
                     recipients.append(ticket.purchaser.email)
-                
-                
+
+
                 send_mail(
                     'GSB24 Ticketing: Ticket Confirmation',
                     msg,
@@ -472,7 +477,7 @@ def buy_ticket(request):
                     recipients,
                 )
                 """
-                
+
             else:
                 messages.add_message(
                     request,
@@ -678,7 +683,6 @@ def download_ticket(request, ref=None):
         response = HttpResponse(pdf_buffer.read(), content_type="application/pdf")
         response['Content-Disposition'] = 'attachment; filename=ticket.pdf'
         return response
-        
 
 
 def patience(request):
@@ -691,3 +695,19 @@ def server_error(request, exception=None):
 
 def page_not_found(request, exception):
     return render(request, "errors/404.html", {}, status=404)
+
+
+class CustomPasswordResetView(auth_views.PasswordResetView):
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({'message': 'Password reset email sent'})
+        return response
+
+
+class CustomPasswordDoneView(auth_views.PasswordResetView):
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({'message': 'Password reset done'})
+        return response

@@ -1,6 +1,6 @@
 Hi {{ticket.name}},
 
-You have NOT yet paid for the {{ticket.kind.name}}{%if not ticket.is_own %} (Guest){% endif %} ticket you purchased to the 2024 Girton Spring Ball at the cost of £{{ticket.price}}.
+You have NOT yet paid for the {{ticket.kind.name}}{%if not ticket.is_own %} (Guest){% endif %} ticket you purchased to the 2025 Girton Spring Ball at the cost of £{{ticket.price}}.
 
 This is a reminder to pay the amount due within 24 hours of your receipt of this email.
 
@@ -22,5 +22,5 @@ For any queries about your ticket, please email it@girtonspringball.com or reply
 
 With warm wishes,
 
-Yuvraj & Peter
-GSB24 IT & Ticketing
+Ishaan & Oliver
+GSB25 IT & Ticketing
