@@ -35,9 +35,26 @@ body {
 }
 
 body {
-  font-family: 'Red Hat Text', sans-serif;
+  font-family: "Red Hat Text", sans-serif;
 }
 
 textarea {
   resize: none;
+}
+
+@media (max-width: 767px) {
+  .header-nav {
+    width: 50%;
+    flex-direction: column;
+  }
+
+  .header-nav:nth-child(n) {
+    width: 100%;
+  }
+
+  .header-nav > :nth-child(n) {
+    width: 100%;
+    text-align: center;
+    font-size: small;
+  }
 }

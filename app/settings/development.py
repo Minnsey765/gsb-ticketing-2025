@@ -1,6 +1,11 @@
 from .common import *
 
-ALLOWED_HOSTS = ['localhost', 'ec2-3-83-223-198.compute-1.amazonaws.com', '127.0.0.1']
+ALLOWED_HOSTS = [
+    'localhost',
+    'ec2-3-83-223-198.compute-1.amazonaws.com',
+    '127.0.0.1',
+    '192.168.1.101',
+]
 DEBUG = True
 SECRET_KEY = 'croissant'
 
