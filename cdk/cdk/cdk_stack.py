@@ -95,6 +95,7 @@ class CdkStack(Stack):
                 directory="../app/"
             ),
             vpc=vpc,
+            memory_size=1024,
             timeout=Duration.minutes(3),
             vpc_subnets=ec2.SubnetSelection(
                             subnet_type= ec2.SubnetType.PRIVATE_ISOLATED,
@@ -219,6 +220,16 @@ class CdkStack(Stack):
             self, "ScanningApiRecord",
             zone=scanning_hosted_zone,
             target=route53.RecordTarget.from_alias(route53_targets.ApiGatewayDomain(scanning_custom_domain))
+        )
+
+        sec_group.add_ingress_rule(
+            peer=ec2.Peer.any_ipv4(),
+            connection=ec2.Port.tcp(587)
+        )
+
+        sec_group.add_ingress_rule(
+            peer=ec2.Peer.any_ipv4(),
+            connection=ec2.Port.SMTP
         )
 
         # Output the API Gateway URL

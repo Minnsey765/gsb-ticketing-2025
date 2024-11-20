@@ -100,7 +100,7 @@ class WorkerApplicationAdmin(admin.ModelAdmin):
             # both purchaser and attendee should receive email
    
             send_mail(
-                'GSB24 Worker Applications: Application Received',
+                'GSB25 Worker Applications: Application Received',
                 msg,
                 'it@girtonspringball.com',
                 recipients,
@@ -221,7 +221,7 @@ class TicketAdmin(admin.ModelAdmin):
             if not ticket.is_own:
                 recipients.append(ticket.purchaser.email)
             send_mail(
-                'GSB24 Ticketing: Ticket Confirmation',
+                'GSB25 Ticketing: Ticket Confirmation',
                 msg,
                 'it@girtonspringball.com',
                 recipients,
@@ -241,7 +241,7 @@ class TicketAdmin(admin.ModelAdmin):
             if not ticket.is_own:
                 recipients.append(ticket.purchaser.email)
             send_mail(
-                'GSB24 Ticketing: Payment Cleared',
+                'GSB25 Ticketing: Payment Cleared',
                 msg,
                 'it@girtonspringball.com',
                 recipients,
@@ -261,7 +261,7 @@ class TicketAdmin(admin.ModelAdmin):
             if not ticket.is_own:
                 recipients.append(ticket.purchaser.email)
             send_mail(
-                'GSB24 Ticketing: Payment reminder',
+                'GSB25 Ticketing: Payment reminder',
                 msg,
                 'it@girtonspringball.com',
                 recipients,
@@ -299,7 +299,7 @@ class TicketAdmin(admin.ModelAdmin):
             recipients = [ticket.purchaser.email]
 
             send_mail(
-                'GSB24 Ticketing: Download your ticket',
+                'GSB25 Ticketing: Download your ticket',
                 strip_tags(msg),
                 'it@girtonspringball.com',
                 recipients,
@@ -334,7 +334,7 @@ class TicketAdmin(admin.ModelAdmin):
             )
             recipients = [ticket.email]
             send_mail(
-                'GSB24 Ticketing: Download your ticket',
+                'GSB25 Ticketing: Download your ticket',
                 strip_tags(msg),
                 'it@girtonspringball.com',
                 recipients,
@@ -414,7 +414,7 @@ class NameChangeAdmin(admin.ModelAdmin):
             )
             recipients = [nc.new_email, nc.ticket.purchaser.email, nc.ticket.email]
             send_mail(
-                'GSB24 Ticketing: Name Change Request',
+                'GSB25 Ticketing: Name Change Request',
                 msg,
                 'it@girtonspringball.com',
                 recipients,
