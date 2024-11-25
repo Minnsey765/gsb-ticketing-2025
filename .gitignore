@@ -13,3 +13,5 @@ scripts/ticket_generation/svgs/
 scanner/staticfiles/*
 scanner/gsbdump.sql
 .venv3.11
+ticket_stats/ticket_sales.xlsx
+ticket_stats/ticketSales.txt
