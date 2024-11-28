@@ -15,3 +15,5 @@ scanner/gsbdump.sql
 .venv3.11
 app/static/*
 cdk/node_modules/*
+ticket_stats/ticket_sales.xlsx
+ticket_stats/ticketSales.txt
