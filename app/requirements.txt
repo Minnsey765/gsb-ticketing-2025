@@ -1,3 +1,4 @@
+boto3
 dj-database-url
 django
 django-s3-storage
@@ -8,8 +9,7 @@ google-cloud-storage
 gunicorn
 Pillow
 psycopg2-binary
-qrcode
+pyOpenSSL==24.2.1qrcode
 requests
 simpleanalytics
 whitenoise[brotli]
-boto3

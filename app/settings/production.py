@@ -1,9 +1,9 @@
-import os
-import boto3
 import json
+import os
+
+import boto3
 
 from .common import *
-
 
 DATABASES = {
     'default': {
@@ -16,7 +16,7 @@ DATABASES = {
     }
 }
 
-if (arn := os.environ.get("AWS_SECRET_ARN")):
+if arn := os.environ.get("AWS_SECRET_ARN"):
     client = boto3.client('secretsmanager')
 
     secret = client.get_secret_value(SecretId=arn).get('SecretString')
@@ -50,27 +50,23 @@ SECRET_KEY = 'croissant'
 # db
 
 
-
-
 MAX_CONN_AGE = 600
 # STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
 ADMINS = [
     ('Yuvraj', 'yuvraj@yuvrajdubey.co.uk'),
+    ('Oliver', 'om380@cam.ac.uk'),
 ]
 
 
-# AWS SES CONFIGURATION (i added "AWS_USER_ACCOUNT_ID = '864899874397'" but idk if it's meant to go here or if it's needed at all)
 """
 EMAIL_BACKEND = 'django_ses.SESBackend'
 AWS_SES_REGION_NAME = 'eu-west-2'
 AWS_SES_REGION_ENDPOINT = 'email-smtp.eu-west-2.amazonaws.com'
-AWS_USER_ACCOUNT_ID = '864899874397'
 USE_SES_V2 = True
 
-AWS_ACCESS_KEY_ID = ''
-AWS_SECRET_ACCESS_KEY = ''
+
 AWS_SES_AUTO_THROTTLE = 0.8
 """
 
@@ -97,4 +93,3 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-

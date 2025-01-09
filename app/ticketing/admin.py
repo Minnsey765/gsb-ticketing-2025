@@ -206,6 +206,7 @@ class TicketAdmin(admin.ModelAdmin):
     )
     actions = [
         'send_confirmation',
+        'send_lent_confirmation',
         'send_payment_confirmation',
         'download_ticketing_details',
         'send_payment_confirm',
@@ -240,7 +241,8 @@ class TicketAdmin(admin.ModelAdmin):
         else:
             return None
 
-    @admin.action(description='Send confirmation email')
+    # confirmation emails before bursar has charged people's lent term college bill
+    @admin.action(description='Send michaelmas confirmation email')
     def send_confirmation(self, request, queryset):
         for ticket in queryset:
             msg = render_to_string("emails/buy.txt", {"ticket": ticket})
@@ -256,7 +258,28 @@ class TicketAdmin(admin.ModelAdmin):
             )
         self.message_user(
             request,
-            f'{queryset.count()} emails were successfully sent.',
+            f'{queryset.count()} michaelmas emails were successfully sent.',
+            messages.SUCCESS,
+        )
+
+    # confirmation email for tickets bought after bursar has charged lent term college bill
+    @admin.action(description='Send lent confirmation email')
+    def send_lent_confirmation(self, request, queryset):
+        for ticket in queryset:
+            msg = render_to_string("emails/buy2.txt", {"ticket": ticket})
+            recipients = [ticket.email]
+            # both purchaser and attendee should receive email
+            if not ticket.is_own:
+                recipients.append(ticket.purchaser.email)
+            send_mail(
+                'GSB25 Ticketing: Ticket Confirmation',
+                msg,
+                'it@girtonspringball.com',
+                recipients,
+            )
+        self.message_user(
+            request,
+            f'{queryset.count()} lent emails were successfully sent.',
             messages.SUCCESS,
         )
 
