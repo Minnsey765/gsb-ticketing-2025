@@ -3,7 +3,7 @@ Hi {{ticket.name}},
 You've bought a {{ticket.kind.name}}{%if not ticket.is_own %} (Guest){% endif %} ticket to the 2025 Girton Spring Ball at the cost of £{{ticket.price}}. This is a confirmation email.
 {% if ticket.payment_method.enum == 'COLLEGE_BILL' %}
 The amount due must be paid to the bank account (details follow) within the next week after receiving this email.
-You may be expecting to pay by college bill, however the deadline for your purchase to be charged to your lent term college bill has unfornately passed.
+You may be expecting to pay by college bill, however the deadline for your purchase to be charged to your lent term college bill has unfortunately passed.
 Once confirmation of your payment has been received, your ticket purchase will be marked as 'completed'. Until then, it will show up as 'pending'. Rest assured, your ticket has been secured.
 {% elif ticket.payment_method.enum == 'BANK_TRANSFER' %}
 The amount due must be paid to the bank account (details follow) within 48 hours of receiving this email. After this, the tickets will be re-released into the pool where they can be bought by other interested buyers.

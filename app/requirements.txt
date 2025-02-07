@@ -9,7 +9,8 @@ google-cloud-storage
 gunicorn
 Pillow
 psycopg2-binary
-pyOpenSSL==24.2.1qrcode
+pyOpenSSL==24.2.1
+qrcode
 requests
 simpleanalytics
 whitenoise[brotli]

@@ -4,5 +4,6 @@ django
 gunicorn
 pre-commit
 psycopg2-binary
-pyOpenSSL==24.2.1requests
+pyOpenSSL==24.2.1
+requests
 whitenoise
