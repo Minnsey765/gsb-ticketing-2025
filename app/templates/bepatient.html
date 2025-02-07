@@ -25,10 +25,9 @@
     }
 {% endblock %}
 {% block main %}
-    <h1 class="fw-bold rainbow-text p-2" style="font-size:calc(3rem + 2.7vw)">Tickets are coming soon!</h1>
-    <p class="display-4"><a href="https://i.pinimg.com/originals/6a/ff/e7/6affe715379ae38e72dd430ca22e6f68.jpg">Our engineers</a> have worked tirelessly and have managed to repair the platform! We <span class="rainbow-text">can't wait</span> to welcome you to this year's Girton Spring Ball!</p>
+    <!-- <h1 class="fw-bold rainbow-text p-2" style="font-size:calc(3rem + 2.7vw)">Tickets are coming soon!</h1> -->
+    <!-- <p class="display-4"><a href="https://i.pinimg.com/originals/6a/ff/e7/6affe715379ae38e72dd430ca22e6f68.jpg">Our engineers</a> have worked tirelessly and have managed to repair the platform! We <span class="rainbow-text">can't wait</span> to welcome you to this year's Girton Spring Ball!</p> -->
 
-    <p class="mt-5 text-center">Hello</p>
     <p class="display-2 rainbow-text text-center" id="demo">Ticket Sales closing at 9pm on 23rd January</p>
     <script>
         // Set the date we're counting down to
@@ -56,7 +55,7 @@
             // If the count down is finished, write some text
             if (distance < 0) {
                 clearInterval(x);
-                document.getElementById("demo").innerHTML = "Ticket sales closed";
+                document.getElementById("demo").innerHTML = "Tickets are now available";
             }
             return y;
         }(), 1000);
