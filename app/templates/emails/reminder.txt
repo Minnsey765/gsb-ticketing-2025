@@ -1,26 +1,19 @@
-Hi {{ticket.name}},
-
-You have NOT yet paid for the {{ticket.kind.name}}{%if not ticket.is_own %} (Guest){% endif %} ticket you purchased to the 2025 Girton Spring Ball at the cost of £{{ticket.price}}.
-
-This is a reminder to pay the amount due within 24 hours of your receipt of this email.
-
-IMPORTANT: The exact payment reference provided must be used. This is also available on the ticketing platform in case you want to consult this at a later time.
-
+Dear {{ticket.name}}.
+I hope this email finds you well. You recently purchased {{ticket.kind.name}}{%if not ticket.is_own %} (Guest){% endif %} to Girton Spring Ball 2025 but our records indicate that as of yet we have NOT received the Bank Transfer needed for the ticket purchase to be successful. Please could you make the transfer of £{{ticket.price}} as soon as possible to:
 Account Name : Girton College
 Bank Name : Barclays Bank
 Sort Code : 20-17-68
 Account Number : 50402508
 Reference : {{ticket.uuid}}
 
-For payments from Overseas:
+Or, for payments from Overseas:
 IBAN Number : GB48BARC20176850402508
 SwiftBic Code : BARCGB22
 
-Your ticket number is {{ticket.uuid}}. Please quote this in all future correspondence with us.
+IMPORTANT: The exact payment reference provided must be used. This is also available on the ticketing platform in case you want to consult this at a later time.
 
-For any queries about your ticket, please email it@girtonspringball.com or reply to this email.
-
-With warm wishes,
-
+If the transfer is not made within 48 hours of receipt of this email, as per our Ticketing Ts&C s, the committee reserves the right to return your ticket to the general pool.
+If anything in this email is in error or you believe you have already made this transfer, please email IT@girtonspringball.com, quoting your unique ticket reference {{ticket.uuid}} in the subject and we can ensure that your ticket purchase is in order.
+Kind regards,
 Ishaan & Oliver
-GSB25 IT & Ticketing
+GSB25 IT & Ticketing.
