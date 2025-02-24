@@ -1,6 +1,6 @@
 Hi {{ticket.name}},
 
-Your payment for your {{ticket.kind.name}}{%if not ticket.is_own %} (Guest){% endif %} ticket to the 2025 Girton Spring Ball at the cost of £{{ticket.price}} with reference {{ticket.uuid}} has been cleared.
+Apologies if you have recieved this already, but this is a message to state that your payment for your {{ticket.kind.name}}{%if not ticket.is_own %} (Guest){% endif %} ticket to the 2025 Girton Spring Ball at the cost of £{{ticket.price}} with reference {{ticket.uuid}} has been cleared.
 
 No further action on this matter is required. Your ticket will be downloadable on the platform at a date closer to the Ball.
 
