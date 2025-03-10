@@ -10,6 +10,12 @@ import segno
 parser = argparse.ArgumentParser(description="generate svgs")
 parser.add_argument("csv_file", type=Path, help="csv file path")
 parser.add_argument(
+    "-y",
+    "--year",
+    default="24",
+    help="year of the event, selects the image (default: 24)",
+)
+parser.add_argument(
     "-c",
     "--compare",
     metavar="NEW_CSV_FILE",
@@ -19,10 +25,10 @@ parser.add_argument(
 args = parser.parse_args()
 
 
-QUEUE_JUMP = Template(Path("QUEUE_JUMP.svg").read_text())
-STANDARD = Template(Path("STANDARD.svg").read_text())
+QUEUE_JUMP = Template(Path("QUEUE_JUMP_" + args.year + ".svg").read_text())
+STANDARD = Template(Path("STANDARD_" + args.year + ".svg").read_text())
 
-OUT_DIR = Path("svgs")
+OUT_DIR = Path("svgs_" + args.year)
 OUT_DIR.mkdir(exist_ok=True)
 
 
